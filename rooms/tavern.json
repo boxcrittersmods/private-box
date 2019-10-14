@@ -12,7 +12,7 @@
         "foreground": "HamTavern_FG.png",
         "sprites": {
             "images": [
-                "https://boxcritters.github.io/private-box/media/rooms/HamTavern_SM.png"
+                "HamTavern_SM.png"
             ],
             "frames": [
                 [
