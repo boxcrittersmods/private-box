@@ -438,6 +438,9 @@ Room.prototype.sortDepth = function() {
     var o = this.playerlist[t.i],
         e = new createjs.Container,
         r = new createjs.Text(t.m, "12px Arial", "#000000");
+    var log = document.getElementById("chatlogArea").value;
+    document.getElementById("chatlogArea").value = (o + " says: " + t + "\n" + log);
+    e && e.balloon.showMessage(t)
     r.textAlign = "center", r.lineWidth = 100;
     var a = r.getBounds(),
         i = createBalloon(100, a.height);
