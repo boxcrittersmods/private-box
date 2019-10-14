@@ -28,7 +28,7 @@ io.on('connect',function(socket) {
       console.log("joinroom",roomId)
       room = Room.GetRoom(roomId);
       Room.AddPlayer(room, player);
-      socket.to(room.roomId).emit("A",Player.ToRoomPlayerFormat(player));
+      socket.to(roomId).emit("A",Player.ToRoomPlayerFormat(player));
       socket.join(roomId);
       socket.emit('joinRoom',room);
     });
