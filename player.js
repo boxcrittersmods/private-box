@@ -28,7 +28,7 @@ function createPlayer(nickname) {
     id:generateId(),
     nickname,
     inventory:[],
-    xPos;433,
+    xPos:433,
     yPos:195,
     rot:0,
     s:5
