@@ -24,7 +24,7 @@ var folder = "./rooms/"
 var rooms = []
 
 async function CreateRoom(id) {
-    var data = await ReadJSON(folder + room);
+    var data = await ReadJSON(folder + room + ".json");
     rooms.push(data);
     return data;
 }
