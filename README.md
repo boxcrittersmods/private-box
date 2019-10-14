@@ -1,2 +1,2 @@
-# private-box
+# Private Box
 Alternative client for Box Critters.
