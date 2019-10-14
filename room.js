@@ -41,7 +41,7 @@ function GetRoom(id) {
 
 function AddPlayer(room,player) {
     room.playerList = room.playerList || [];
-    room.playerList = Player.ToRoomPlayerFormat(player);
+    room.playerList.push(Player.ToRoomPlayerFormat(player));
 }
 
 function RemovePlayer(room,player) {
