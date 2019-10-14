@@ -22,6 +22,8 @@ function createPlayer(nickname) {
   };
 }
 
+app.use(express.static('public'))
+
 io.on('connect',function(socket) {
     console.log("Client Connected");
     socket.emit("connect");
@@ -34,6 +36,7 @@ io.on('connect',function(socket) {
 
     socket.on('joinRoom',function({roomId}){
       socket.join(roomId);
+      socket.emit('joinRoom')
     });
     
     socket.on('login',function({username,ticket}){
