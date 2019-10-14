@@ -28,10 +28,10 @@ function createPlayer(nickname) {
     id:generateId(),
     nickname,
     inventory:[],
-    xPos,
-    yPos,
-    rot,
-    s
+    xPos=433,
+    yPos=195,
+    rot=0,
+    s=5
   };
   players.push(player);
   return player
