@@ -40,12 +40,12 @@ function GetRoom(id) {
 }
 
 function AddPlayer(room,player) {
-    room.playerList = room.playerList || [];
-    room.playerList.push(Player.ToRoomPlayerFormat(player));
+    room.playerlist = room.playerList || [];
+    room.playerlist.push(Player.ToRoomPlayerFormat(player));
 }
 
 function RemovePlayer(room,player) {
-    room.playerList = room.playerList.filter(p=>p.i!=player.id);
+    room.playerlist = room.playerlist.filter(p=>p.i!=player.id);
 }
 
 module.exports = {
