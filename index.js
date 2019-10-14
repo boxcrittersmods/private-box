@@ -30,7 +30,7 @@ io.on('connect',function(socket) {
       socket.join(roomId);
       Room.AddPlayer(room, player);
 
-
+      socket.to(room.roomId).emit("A",Player.ToRoomPlayerFormat(player));
       socket.emit('joinRoom',room);
     });
     
