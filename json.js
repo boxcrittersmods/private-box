@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-function ReadJSON(file, cb) {
+function ReadJSON(file) {
     return new Promise((resolve,reject)=>{
         fs.readFile(require.resolve(file), (err,data)=>{
             if(err) {
@@ -9,7 +9,7 @@ function ReadJSON(file, cb) {
                 resolve(JSON.parse(data));
             }
         });
-    }
+    });
     
 }
 
