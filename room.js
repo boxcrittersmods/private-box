@@ -40,7 +40,7 @@ function GetRoom(id) {
 }
 
 function AddPlayer(room,player) {
-    room.playerlist = room.playerList || [];
+    room.playerlist = room.playerlist || [];
     room.playerlist.push(Player.ToRoomPlayerFormat(player));
 }
 
