@@ -37,7 +37,7 @@ CreateRoom(roomId);
 });
 
 function GetRoom(id) {
-    return rooms.find(r => r.roomId === roomId);
+    return rooms.find(r => r.roomId === id);
 }
 
 function AddPlayer(room,player) {
