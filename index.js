@@ -27,10 +27,10 @@ io.on('connect',function(socket) {
     socket.on('joinRoom',function({roomId}){
       console.log("joinroom",roomId)
       room = Room.GetRoom(roomId);
-      socket.join(roomId);
       Room.AddPlayer(room, player);
-      socket.emit('joinRoom',room);
       socket.to(room.roomId).emit("A",Player.ToRoomPlayerFormat(player));
+      socket.join(roomId);
+      socket.emit('joinRoom',room);
     });
     
     socket.on('login',function({username,ticket}){
