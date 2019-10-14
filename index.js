@@ -6,25 +6,43 @@ var app = express();
 var server = webserver(app);
 var io = socket(server);
 
+var lastId = 0;
+var players = [];
+
+function generateId() {
+  lastId++;
+  return lastId.toString(16);
+}
+
+function createPlayer(nickname) {
+  return{
+    playerId:generateId(),
+    nickname,
+    inventory:[]
+  };
+}
+
 io.on('connect',function(socket) {
     console.log("Client Connected");
+    socket.emit("connect");
     socket.on('disconnect', function(){
       console.log('Client disconnected');
     });
-});
 
-io.on('click',function(socket){
+    socket.on('click',function({x,y}){
+    });
 
-});
-
-io.on('joinRoom',function(socket){
-
-});
-
-io.on('login',function(socket){
-
-});
-
-io.on('sendMessage',function(socket){
-
+    socket.on('joinRoom',function({roomId}){
+      socket.join(roomId);
+    });
+    
+    socket.on('login',function({username,ticket}){
+      var player = createPlayer(username);
+      players.push(player);
+      sockek.emit('login',player);
+    });
+    
+    socket.on('sendMessage',function({message}){
+    
+    });
 });
