@@ -24,9 +24,9 @@ io.on('connect',function(socket) {
       console.log("click",x,y)
     });
 
-    socket.on('joinRoom',async function({roomId}){
+    socket.on('joinRoom',function({roomId}){
       console.log("joinroom",roomId)
-      var room = Room.GetRoomFromID(roomId)|await Room.CreateRoom(roomId);
+      room = Room.GetRoom(roomId);
       socket.join(roomId);
       Room.AddPlayer(room, player);
 

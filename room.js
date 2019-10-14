@@ -20,7 +20,10 @@ artwork:
 */
 const ReadJSON = require('./json');
 const Player = require('./player')
-var folder = "./rooms/"
+var folder = "./rooms/";
+var roomIds = [
+    "tavern"
+]
 var rooms = []
 
 async function CreateRoom(id) {
@@ -29,7 +32,11 @@ async function CreateRoom(id) {
     return data;
 }
 
-function GetRoomFromID(id) {
+roomIds.forEach(roomId=>{
+CreateRoom(roomId);
+});
+
+function GetRoom(id) {
     return rooms.find(r => r.roomId === roomId);
 }
 
@@ -39,7 +46,6 @@ function AddPlayer(room,player) {
 }
 
 module.exports = {
-    CreateRoom,
-    GetRoomFromID,
+    GetRoom,
     AddPlayer
 }
