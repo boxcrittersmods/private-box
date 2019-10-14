@@ -1,10 +1,10 @@
 const webserver = require("webserver");
 const express = require('express');
-const socket = require('socket.io');
+const socketIo = require('socket.io');
 
 var app = express();
 var server = webserver(app);
-var io = socket(server);
+var io = socketIo(server);
 
 var lastId = 0;
 var players = [];
