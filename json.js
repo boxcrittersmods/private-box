@@ -1,13 +1,16 @@
 const fs = require('fs');
 
 function ReadJSON(file, cb) {
-    fs.readFile(require.resolve(file), (err,data)=>{
-        if(err) {
-            cb(err);
-        } else {
-            cb(null,JSON.parse(data));
-        }
-    });
+    return new Promise((resolve,reject)=>{
+        fs.readFile(require.resolve(file), (err,data)=>{
+            if(err) {
+                reject(err);
+            } else {
+                resolve(JSON.parse(data));
+            }
+        });
+    }
+    
 }
 
 module.exports = ReadJSON;
