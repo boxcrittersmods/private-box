@@ -1,4 +1,5 @@
-const webserver = require("webserver");
+const http = require('http');
+const webserver = require('webserver');
 const express = require('express');
 const socketIo = require('socket.io');
 
@@ -22,7 +23,7 @@ function createPlayer(nickname) {
   };
 }
 
-app.use(express.static('public'))
+app.use(express.static('public'));
 
 io.on('connect',function(socket) {
     console.log("Client Connected");
