@@ -1,5 +1,3 @@
-import { totalmem } from "os";
-
 /*
 PLAYER
 playerId: string
