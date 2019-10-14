@@ -29,15 +29,14 @@ io.on('connect',function(socket) {
       room = Room.GetRoom(roomId);
       socket.join(roomId);
       Room.AddPlayer(room, player);
-
-      socket.to(room.roomId).emit("A",Player.ToRoomPlayerFormat(player));
       socket.emit('joinRoom',room);
+      socket.to(room.roomId).emit("A",Player.ToRoomPlayerFormat(player));
     });
     
     socket.on('login',function({username,ticket}){
       console.log("login",username, ticket)
       player = Player.GetPlayerFromNickname(username) | Player.createPlayer(username);
-      socket.emit('login',  Player.player);
+      socket.emit('login',  Player.ToRoomPlayerFormat(player));
     });
     
     socket.on('sendMessage',function({message}){
