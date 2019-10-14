@@ -11,4 +11,20 @@ io.on('connect',function(socket) {
     socket.on('disconnect', function(){
       console.log('Client disconnected');
     });
-})
+});
+
+io.on('click',function(socket){
+
+});
+
+io.on('joinRoom',function(socket){
+
+});
+
+io.on('login',function(socket){
+
+});
+
+io.on('sendMessage',function(socket){
+
+});
