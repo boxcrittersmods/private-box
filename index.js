@@ -43,7 +43,7 @@ io.on('connect',function(socket) {
     socket.on('login',function({username,ticket}){
       var player = createPlayer(username);
       players.push(player);
-      sockek.emit('login',player);
+      socket.emit('login',player);
     });
     
     socket.on('sendMessage',function({message}){
