@@ -18,10 +18,12 @@ io.on('connect',function(socket) {
     socket.emit("connect");
     socket.on('disconnect', function(){
       console.log('Client disconnected');
+      socket.to(room.roomId).emit("R",Player.ToRoomPlayerFormat(player));
     });
 
     socket.on('click',function({x,y}){
       console.log("click",x,y)
+      socket.to(room.roomId).emit("P",Player.ToRoomPlayerFormat(player));
     });
 
     socket.on('joinRoom',function({roomId}){
