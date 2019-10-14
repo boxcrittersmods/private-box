@@ -26,14 +26,13 @@ var roomIds = [
 ]
 var rooms = []
 
-async function CreateRoom(id) {
+async function LoadRoom(id) {
     var data = await ReadJSON(folder + id + ".json");
     rooms.push(data);
-    return data;
 }
 
 roomIds.forEach(roomId=>{
-CreateRoom(roomId);
+    LoadRoom(roomId);
 });
 
 function GetRoom(id) {

@@ -36,7 +36,7 @@ io.on('connect',function(socket) {
     socket.on('login',function({username,ticket}){
       console.log("login",username, ticket)
       player = Player.GetPlayerFromNickname(username) | Player.createPlayer(username);
-      socket.emit('login',  Player.ToRoomPlayerFormat(player));
+      socket.emit('login',  Player.ToNewPlayerFormat(player));
     });
     
     socket.on('sendMessage',function({message}){
