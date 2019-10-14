@@ -47,7 +47,7 @@ function GetPlayerFromNickname(nickname) {
 
 function ToNewPlayerFormat(player) {
     return {
-        playerId:player.id,
+        playerId: player.id,
         nickname: player.nickname,
         inventory: player.inventory
     }

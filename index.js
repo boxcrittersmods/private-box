@@ -14,18 +14,18 @@ app.use(express.static('public'));
 io.on('connect',function(socket) {
   var player;
   var room;
-    console.log("Client Connected");
+    console.log("Client Connected",socket.id,);
     socket.emit("connect");
     socket.on('disconnect', function(){
       console.log('Client disconnected');
     });
 
     socket.on('click',function({x,y}){
-      console.log("click",x,y)
+      console.log(player.username||socket.id,"click",x,y)
     });
 
     socket.on('joinRoom',function({roomId}){
-      console.log("joinroom",roomId)
+      console.log(player.username||socket.id,"joinroom",roomId)
       room = Room.GetRoom(roomId);
       socket.join(roomId);
       Room.AddPlayer(room, player);
@@ -34,12 +34,12 @@ io.on('connect',function(socket) {
     });
     
     socket.on('login',function({username,ticket}){
-      console.log("login",username, ticket)
-      player = Player.GetPlayerFromNickname(username) | Player.createPlayer(username);
-      socket.emit('login',  Player.ToNewPlayerFormat(player));
+      console.log(username,"login",username, ticket)
+      player = Player.GetPlayerFromNickname(username) || Player.createPlayer(username);
+      socket.emit('login', Player.ToNewPlayerFormat(player));
     });
     
     socket.on('sendMessage',function({message}){
-      console.log("sendMessage",message)
+      console.log(player.username||socket.id,"sendMessage",message)
     });
 });

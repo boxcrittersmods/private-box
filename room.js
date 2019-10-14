@@ -49,5 +49,6 @@ function RemovePlayer(room,player) {
 }
 
 module.exports = {
+    GetRoom,
     AddPlayer
 }
