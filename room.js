@@ -44,7 +44,10 @@ function AddPlayer(room,player) {
     room.playerList = Player.ToRoomPlayerFormat(player);
 }
 
+function RemovePlayer(room,player) {
+    room.playerList = room.playerList.filter(p=>p.i!=player.id);
+}
+
 module.exports = {
-    GetRoom,
     AddPlayer
 }
