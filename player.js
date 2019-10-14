@@ -65,7 +65,7 @@ function ToRoomPlayerFormat(player) {
 }
 
 
-module.exports {
+module.exports = {
     createPlayer,
     GetPlayerFromID,
     GetPlayerFromNickname,
