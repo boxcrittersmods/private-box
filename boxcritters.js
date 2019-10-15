@@ -38,6 +38,8 @@ function Click(session,{x,y}) {
 }
 function SendMessage(session,{message}) {
     console.log("sendMessage",message);
+    session.socket.to(session.room.id).emit("M",Crumb.messageCrumb(session.player,message));
+    session.socket.emit("M",Crumb.messageCrumb(session.player,message));
 }
 
 function SetupSession(socket) {
