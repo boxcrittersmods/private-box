@@ -35,7 +35,7 @@ function calcAngle(cx, cy, ex, ey) {
     var theta = Math.atan2(dy, dx); // range (-PI, PI)
     theta *= 180 / Math.PI; // rads to degs, range (-180, 180_
     if (theta < 0) theta = 360 + theta; // range (0, 360)
-    return (450-theta)%360;
+    return theta+90;
   }
 
 function Click(session,{x,y}) {
