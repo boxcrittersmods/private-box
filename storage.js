@@ -29,9 +29,23 @@ var folder = "./rooms/";
 var roomIds = [
     "tavern"
 ]
+
+function GetHoliday() {
+    if(new Date().getMonth()==9) {
+        return "halloween";
+    }
+    return undefined;
+}
  
 async function SaveNewRoom(id) {
-    var data = await ReadJSON(folder + id + ".json");
+    var name = id;
+    if(GetHoliday()){
+        name = name + "-" + GetHoliday();
+    }
+    var data = await ReadJSON(folder + name + ".json");
+    if(GetHoliday()&&!data) {
+        data = await ReadJSON(folder + id + ".json");
+    }
     var room = new Room(id,data);
     rooms.push(room);
 }
