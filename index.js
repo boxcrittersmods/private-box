@@ -23,6 +23,8 @@ io.on('connect',function(socket) {
 
     socket.on('click',function({x,y}){
       console.log("click",x,y)
+      player.xPos = x;
+      player.yPos = y;
       socket.to(room.roomId).emit("P",Player.ToRoomPlayerFormat(player));
     });
 
