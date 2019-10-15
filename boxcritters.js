@@ -30,6 +30,9 @@ function JoinRoom(session,{roomId}) {
 }
 function Click(session,{x,y}) {
     console.log("click",x,y);
+    session.player.r = Math.atan2(y - session.player.y, x - session.player.x) * 180 / Math.PI;
+    session.player.x = x;
+    session.player.y = y;
     session.socket.to(session.room.id).emit("P",Crumb.moveCrumb(session.player));
     session.socket.emit("P",Crumb.moveCrumb(session.player));
 }
@@ -59,8 +62,6 @@ function SetupSession(socket) {
         JoinRoom(session,crumb);
     });
     socket.on('click',function(crumb){
-        session.player.r = 0;
-        
         Click(session,crumb);
     });
     socket.on('sendMessage',function(crumb){
