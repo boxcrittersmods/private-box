@@ -28,9 +28,19 @@ function JoinRoom(session,{roomId}) {
     //Emit Room Crumb
     session.socket.emit('joinRoom',Crumb.roomCrumb(session.room));
 }
+
+function calcAngle(cx, cy, ex, ey) {
+    var dy = ey - cy;
+    var dx = ex - cx;
+    var theta = Math.atan2(dy, dx); // range (-PI, PI)
+    theta *= 180 / Math.PI; // rads to degs, range (-180, 180_
+    if (theta < 0) theta = 360 + theta; // range (0, 360)
+    return (450-theta)%360;
+  }
+
 function Click(session,{x,y}) {
     console.log("click",x,y);
-    session.player.r = Math.atan2(y - session.player.y, x - session.player.x) * 180 / Math.PI;
+    session.player.r = calcAngle(session.player.x,session.player.y,x,y);
     session.player.x = x;
     session.player.y = y;
     session.socket.to(session.room.id).emit("P",Crumb.moveCrumb(session.player));

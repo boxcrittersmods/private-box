@@ -1,0 +1,51 @@
+PLAYER
+id
+nickname
+x
+y
+rot
+s?
+
+ROOM
+id
+
+jsonfile
+
+
+
+Flow:
+c:connect
+s:connect
+c:login
+s:login
+c:joinRoom
+s:joinRoom
+
+
+socket.on("login", function(t) {
+        console.log("login", t), socket.emit("joinRoom", {
+            roomId: "tavern"
+        })
+    }), socket.on("joinRoom", function(t) {
+        console.log("joinRoom", t)
+    }), socket.on("A", function(t) {
+        console.info("A", t)
+    }), socket.on("R", function(t) {
+        console.info("R", t)
+    }), socket.on("P", function(t) {
+        console.info("P", t) 
+    }), socket.on("M", function(t) {
+        console.info("M", t)
+    })
+
+        90
+180      0
+       270
+
+      270
+180     360
+        90
+
+       360
+270        450
+      180
