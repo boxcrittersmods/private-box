@@ -19,7 +19,7 @@ function Player(nickname) {
     this.inventory = [];
     this.x = 433;
     this.y = 195;
-    this.rot = 0;
+    this.r = 0;
     this.s = 5;
 }
 

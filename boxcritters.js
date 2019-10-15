@@ -59,6 +59,8 @@ function SetupSession(socket) {
         JoinRoom(session,crumb);
     });
     socket.on('click',function(crumb){
+        session.player.r = 0;
+        
         Click(session,crumb);
     });
     socket.on('sendMessage',function(crumb){
