@@ -1,74 +1,26 @@
 /*
 PLAYER
-playerId: string
-nickname: string
-inventory: array
-
-room player format
-i: playerId
-n: Nickname
-x: Ypos
-y: Xpos
-r: Rotation
-s: ??
+playerId
+Nickname
+Ypos
+Xpos
+Rotation
+s
 */
-
-
-var players = [];
-
-var lastId = 0;
-
-function generateId() {
-  lastId++;
-  return lastId.toString(16);
+var lastid = -1;
+function generateID(){
+    lastid++;
+    return lastid.toString();
+}
+function Player(nickname) {
+    if (!new.target) throw 'Player() must be called with new';
+    this.id = generateID();
+    this.nickname = nickname;
+    this.inventory = [];
+    this.x = 433;
+    this.y = 195;
+    this.rot = 0;
+    this.s = 5;
 }
 
-function createPlayer(nickname) {
-  var player = {
-    id:generateId(),
-    nickname,
-    inventory:[],
-    xPos:433,
-    yPos:195,
-    rot:0,
-    s:5
-  };
-  players.push(player);
-  return player
-}
-
-function GetPlayerFromID(id) {
-  return players.find(p => p.id === id);
-}
-
-function GetPlayerFromNickname(nickname) {
-  return players.find(p => p.nickname === nickname);
-}
-
-function ToNewPlayerFormat(player) {
-    return {
-        playerId: player.id,
-        nickname: player.nickname,
-        inventory: player.inventory
-    }
-}
-
-function ToRoomPlayerFormat(player) {
-    return {
-        i: player.id,
-        n: player.nickname,
-        x: player.xPos,
-        y: player.yPos,
-        r: player.rot,
-        s: player.s
-    }
-}
-
-
-module.exports = {
-    createPlayer,
-    GetPlayerFromID,
-    GetPlayerFromNickname,
-    ToNewPlayerFormat,
-    ToRoomPlayerFormat
-}
+module.exports = Player;

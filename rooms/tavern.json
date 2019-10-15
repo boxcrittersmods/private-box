@@ -1,8 +1,5 @@
 {
-    "roomId": "tavern",
     "name": "Tavern",
-    "playerlist": [
-    ],
     "width": 850,
     "height": 480,
     "margin": 0,

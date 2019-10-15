@@ -1,55 +1,39 @@
 /*
 ROOM
-artwork:
-    background
-    forground
-    props:
-        Array(Array(number)[3])
-    sprites:
-        frames: Array(Array(number)[7])
-        images: Array(string)
-    height:number
-    margin:number
-    minDistance:20
+roomId:string
+playerList
+json:
     name:string
-    playerList
+    minDistance:20
+    height:number
+    width: number
+    margin:number
     roomId:tavern
     tileMap:Array(Array(number)[8])
     tilesize: number
-    width: number
+    artwork:
+        background
+        forground
+        props:
+            Array(Array(number)[3])
+        sprites:
+            frames: Array(Array(number)[7])
+            images: Array(string)
 */
-const ReadJSON = require('./json');
-const Player = require('./player')
-var folder = "./rooms/";
-var roomIds = [
-    "tavern"
-]
-var rooms = []
 
-async function LoadRoom(id) {
-    var data = await ReadJSON(folder + id + ".json");
-    rooms.push(data);
+
+function Room(id,json) {
+    if (!new.target) throw 'Room() must be called with new';
+    this.id = id;
+    this.players = [];
+    this.json = json;
+}
+Room.prototype.addPlayer = function(player) {
+    this.players.push(player)
 }
 
-roomIds.forEach(roomId=>{
-    LoadRoom(roomId);
-});
-
-function GetRoom(id) {
-    return rooms.find(r => r.roomId === id);
+Room.prototype.removePlayer = function(player) {
+    this.players = this.players.filter(p=>p!==player);
 }
 
-function AddPlayer(room,player) {
-    room.playerlist = room.playerlist || [];
-    room.playerlist.push(Player.ToRoomPlayerFormat(player));
-}
-
-function RemovePlayer(room,player) {
-    room.playerlist = room.playerlist.filter(p=>p.i!=player.id);
-}
-
-module.exports = {
-    GetRoom,
-    AddPlayer,
-    RemovePlayer
-}
+module.exports = Room;
