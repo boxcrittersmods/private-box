@@ -10,7 +10,7 @@ function loginCrumb(player) {
 
 function playerCrumb(player) {
     return {
-        i:player,
+        i:player.id,
         n:player.nickname,
         x:player.x,
         y:player.y,
