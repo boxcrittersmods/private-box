@@ -7,7 +7,7 @@ Xpos
 Rotation
 s
 */
-var lastid = -1;
+var lastid = 0;
 function generateID(){
     lastid++;
     return lastid.toString();
