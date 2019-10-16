@@ -5,11 +5,11 @@
     "margin": 0,
     "minDistance": 20,
     "artwork": {
-        "background": "HalloweenTavern_BG.png",
-        "foreground": "HalloweenTavern_FG.png",
+        "background": "HalloweenBarn_BG.png",
+        "foreground": "",
         "sprites": {
             "images": [
-                "HalloweenTavern_SS.png"
+                ""
             ],
             "frames": [
                 [
