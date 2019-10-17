@@ -1,5 +1,6 @@
 const ReadJSON = require('./json');
 const Room = require('./room');
+const path = require('path');
 
 const players = [];
 const rooms = [];
@@ -25,7 +26,8 @@ function GetPlayer(nickname) {
 /*****************
  * ROOMS
  *****************/
-var folder = "./rooms/";
+var folder = path.join(global.appDir,"./rooms/");
+console.log("ROOMS:",folder)
 var roomIds = [
     "tavern"
 ]

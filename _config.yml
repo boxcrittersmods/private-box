@@ -1,2 +1,37 @@
+# This is a Jekyll configoration file for Github Pages
+
 title: BoxCritters Private Box
 url: https://boxcritters.github.io/private-box
+
+
+permalink: pretty
+production: true
+
+# Build settings
+markdown: kramdown
+# theme: minima
+
+kramdown:
+  # Enable GitHub Flavored Markdown (fenced code blocks)
+  input: GFM
+  # Disable auto-generated ID's for headings
+  auto_ids: false
+
+
+excludes:
+  - lib
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - bower.json
+  - "*.sh"
+  - README.md
+  - gulffile.js
+  - package.json
+  - vendor
+  - ".gitignore"
+  - CNAME
+  - icomoon-selection.json
+  - server
+  - build
+  - index.js
