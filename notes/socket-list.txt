@@ -1,0 +1,18 @@
+# client->server(C)
+click(x,y)
+joinRoom(roomId
+login
+sendMessage
+
+# server>client(S)
+stagemousedown
+tick
+connect
+disconnect
+login
+joinRoom
+A
+R
+P
+M
+login
