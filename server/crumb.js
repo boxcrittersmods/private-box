@@ -22,7 +22,7 @@ function playerCrumb(player) {
 function roomCrumb(room) {
     return {
         roomId:room.id,
-        name:room.name,
+        name:room.json.name,
         playerlist:room.players.map(p=>playerCrumb(p)),
         height:room.json.height,
         width:room.json.width,
