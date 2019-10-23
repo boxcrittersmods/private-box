@@ -16,7 +16,7 @@ function Login(session,{username,ticket}) {
     session.socket.emit("login",Crumb.loginCrumb(session.player));
 }
 function JoinRoom(session,{roomId}) {
-    if(!session.room) return;
+    if(!session.player) return;
     console.log("joinroom",roomId);
     //LoadRoom
     session.room = Storage.GetRoom(roomId);
