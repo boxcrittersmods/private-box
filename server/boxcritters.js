@@ -16,6 +16,7 @@ function Login(session,{username,ticket}) {
     session.socket.emit("login",Crumb.loginCrumb(session.player));
 }
 function JoinRoom(session,{roomId}) {
+    if(!session.room) return;
     console.log("joinroom",roomId);
     //LoadRoom
     session.room = Storage.GetRoom(roomId);
@@ -39,6 +40,8 @@ function calcAngle(cx, cy, ex, ey) {
   }
 
 function Click(session,{x,y}) {
+    if(!session.room) return;
+    if(!session.player) return;
     console.log("click",x,y);
     session.player.r = calcAngle(session.player.x,session.player.y,x,y);
     session.player.x = x;
@@ -47,6 +50,8 @@ function Click(session,{x,y}) {
     session.socket.emit("P",Crumb.moveCrumb(session.player));
 }
 function SendMessage(session,{message}) {
+    if(!session.room) return;
+    if(!session.player) return;
     console.log("sendMessage",message);
     session.socket.to(session.room.id).emit("M",Crumb.messageCrumb(session.player,message));
     session.socket.emit("M",Crumb.messageCrumb(session.player,message));
