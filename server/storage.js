@@ -1,4 +1,4 @@
-const ReadJSON = require('./json');
+const JSONTools = require('./json');
 const Room = require('./room');
 const path = require('path');
 
@@ -41,16 +41,18 @@ function GetHoliday() {
  
 async function SaveNewRoom(id) {
     var name = id;
-    if(GetHoliday()){
-        name = name + "-" + GetHoliday();
+    var holiday = GetHoliday();
+    if(holiday){
+        var holidayJson = name = name + "-" + holiday;
+        if(JSONTools.JSONExists(holidayJson)) {
+            name = holidayJson;
+        }
     }
-    var data = await ReadJSON(folder + name + ".json");
-    if(GetHoliday()&&!data) {
-        data = await ReadJSON(folder + id + ".json");
-    }
+    var data = await JSONTools.ReadJSON(folder + name + ".json");
     var room = new Room(id,data);
     rooms.push(room);
 }
+
 
 function InitRooms() {
     roomIds.forEach(roomId=>{
