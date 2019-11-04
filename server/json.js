@@ -2,7 +2,7 @@ const fs = require('fs');
 
 function JSONExists(file) {
     try {
-      return fs.existsSync(path);
+      return fs.existsSync(file);
     } catch(err) {
         return false;
     }
@@ -11,7 +11,7 @@ function JSONExists(file) {
 function ReadJSON(file) {
     return new Promise((resolve,reject)=>{
     try {
-      if (fs.existsSync(path)) {
+      if (fs.existsSync(file)) {
         fs.readFile(require.resolve(file), (err,data)=>{
                 if(err) {
                     reject(err);

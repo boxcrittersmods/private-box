@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -e # halt script on error
+
+echo "JEKYL BUILD"
+bundle exec jekyll build
+
+echo ""
+echo "HTML PROOFER"
+bundle exec htmlproofer ./_site --disable-externel --alt-ignore '/.*/'

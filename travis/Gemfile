@@ -1,0 +1,9 @@
+source "https://rubygems.org"
+ruby RUBY_VERSION
+
+gem 'github-pages', group: :jekyll-plugins
+gem 'nokogirl',">=1.8.5"
+
+group :test do
+    gem 'html-proofer'
+end

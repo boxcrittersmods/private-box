@@ -2,6 +2,9 @@
 
 title: BoxCritters Private Box
 url: https://boxcritters.github.io/private-box
+server-url: https://bcmc-private-box.herokuapp.com
+
+pb-plugins:
 
 
 permalink: pretty
@@ -9,12 +12,9 @@ production: true
 
 # Build settings
 markdown: kramdown
-# theme: minima
 
 kramdown:
-  # Enable GitHub Flavored Markdown (fenced code blocks)
   input: GFM
-  # Disable auto-generated ID's for headings
   auto_ids: false
 
 

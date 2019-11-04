@@ -1,0 +1,104 @@
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!-- Frameworks -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+
+    <!--PrivateBox Frameworks-->
+    <script src="{{site.url}}/client/events.js"></script>
+    <script src="{{site.url}}/client/plugin.js"></script>
+
+    <!--PrivateBox Plugins-->
+    {% include plugins.html %}
+
+    <!-- Box Critters -->
+    <script>
+(function ($) {
+
+    $.fn.addCard = function (name, text) {
+        var card = $('<div class="card mb-4"></div>').addClass(name);
+        var head = $('<div class="card-header"><div>').text(name).appendTo(card);
+        var body = $('<div class="card-body"></div>').text(text).appendTo(card);
+        var body = $('<div class="card-footer" style="display:none"></div>').appendTo(card);
+        this.append(card);
+        return this;
+    };
+
+    $.fn.addMenu = function (menu) {
+        var html = $('<div class="menu"></div>');
+        for (var n = 0; n < menu.length; n++) {
+            let option = menu[n];
+            var button = $('<button class="btn btn-primary m-1"></button>')
+                .text(option.text)
+                .appendTo(html);
+            if (option.action) {
+                button.click(function () {
+                    socket.emit(option.action, option.data);
+                });
+            }
+        }
+        this.append(html);
+        return this;
+    };
+
+    $.fn.addAlert = function (name, message, style) {
+        var html = $('<div class="alert m-2"></div>')
+            .addClass('alert-' + style)
+            .html('<strong>' + name + ':</strong> ' + message);
+        this.append(html);
+        return this;
+    };
+
+    $.fn.feedback = function (message) {
+        if (message) {
+            this.addClass('is-invalid').next('.invalid-feedback').text(message);
+        } else {
+            this.removeClass('is-invalid');
+        }
+        return this;
+    }
+
+    $.fn.replaceText = function (searchvalue, newvalue) {
+        var text = this.text();
+        if (text !== undefined) {
+            this.text(text.replace(searchvalue, newvalue));
+        }
+        return this;
+    }
+
+}(jQuery));
+
+	</script>
+	
+    <script src="{{site.url}}/client/login.js"></script>
+    <script src="{{site.url}}/client/client1.js"></script>
+    <script src="{{site.url}}/plugins/load.js"></script>
+	
+    <script src="{{site.url}}/client/data.js"></script>
+	
+</div>
+    <script src="{{site.url}}/client/init.js"></script>
+
+    <!-- END --></div></div>
+	</body>
+	
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130238613-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-130238613-2');
+</script>
+
+<script>
+function play() {
+	game.style.display = 'inline-block';
+	login.style.display = 'none';	
+}
+</script>

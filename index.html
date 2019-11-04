@@ -1,154 +1,36 @@
 ---
+layout: default
 ---
-<!doctype html>
-<html lang="en-US">
-<title>Private Box</title>
-	<head>
-		<style>
-	body {
-		background-color: #EEEEEE;
-	}
-	
-	.client {
-		background-color: #EEEEEE;
-	}
-	
-	input:invalid, textarea:invalid {
-		background-color: #FFFFFF;
-	}
-</style>
+<div id="login" class="login container mb-4" style="background-color:#EEEEEE;">
+    <center><a href="http://boxcritters.github.io"><img src="logo.png" alt="" height="125"></a></center>
+    <div class="card m-2">
+        <div class="card-header">Enter your Username</div>
+        <div class="card-body">
+            <form novalidate>
+                <input type="Username" class="form-control" id="username" placeholder="Username" required
+                    autocomplete="Username">
+        </div>
+        <center>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" onclick="play()">Login</button>
+            </div>
+        </center>
+        </form>
+    </div>
+</div>
+</div>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script type="text/javascript" src="https://download.playfab.com/PlayFabClientApi.js"></script>
-  </head>
-  
-<body style="background-color:#EEEEEE;">
-	
-    <div id="login" class="login container mb-4" style="background-color:#EEEEEE;">
-        <center><a href="http://boxcritters.github.io"><img src="logo.png" alt="" height="125"></a></center>
-        <div class="card m-2">
-            <div class="card-header">Enter your Username</div>
-            <div class="card-body">
-                <form novalidate>
-                        <input type="Username" class="form-control" id="username" placeholder="Username" required autocomplete="Username">
-                    </div>
-					<center>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary" onclick="play()">Login</button>
-                    </div>
-					</center>
-                </form>
+
+<center>
+    <div id="game" style="display:none;background-color:#EEEEEE;">
+        <div class="client container hide">
+            <canvas id="stage" width="850" height="480"></canvas>
+            <div class="input-group">
+                <input id="chat-message" type="text" class="form-control" maxlength="48">
+                <span class="input-group-btn"><button class="btn btn-primary chat-btn">Send</button></span>
+            </div>
+            <div class="row justify-content-center chatlog">
+                <textarea id="chatlogArea" style="width: 75%;border:0;background-color: rgba(0,0,0,0);"></textarea>
             </div>
         </div>
-    </div>
-
-
-<center><div id="game" style="display:none;background-color:#EEEEEE;">
-    <div class="client container hide">
-        <canvas id="stage" width="850" height="480"></canvas>
-        <div class="input-group">
-            <input id="chat-message" type="text" class="form-control" maxlength="48">
-            <span class="input-group-btn"><button class="btn btn-primary chat-btn">Send</button></span>
-        </div>
-	<div class="row justify-content-center chatlog">
-	    <textarea id="chatlogArea" style="width: 75%;border:0;background-color: rgba(0,0,0,0);"></textarea>
-	</div>
-</div></center>
-
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-    <!-- Frameworks -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-    <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
-
-    <!-- Box Critters -->
-    <script>
-(function ($) {
-
-    $.fn.addCard = function (name, text) {
-        var card = $('<div class="card mb-4"></div>').addClass(name);
-        var head = $('<div class="card-header"><div>').text(name).appendTo(card);
-        var body = $('<div class="card-body"></div>').text(text).appendTo(card);
-        var body = $('<div class="card-footer" style="display:none"></div>').appendTo(card);
-        this.append(card);
-        return this;
-    };
-
-    $.fn.addMenu = function (menu) {
-        var html = $('<div class="menu"></div>');
-        for (var n = 0; n < menu.length; n++) {
-            let option = menu[n];
-            var button = $('<button class="btn btn-primary m-1"></button>')
-                .text(option.text)
-                .appendTo(html);
-            if (option.action) {
-                button.click(function () {
-                    socket.emit(option.action, option.data);
-                });
-            }
-        }
-        this.append(html);
-        return this;
-    };
-
-    $.fn.addAlert = function (name, message, style) {
-        var html = $('<div class="alert m-2"></div>')
-            .addClass('alert-' + style)
-            .html('<strong>' + name + ':</strong> ' + message);
-        this.append(html);
-        return this;
-    };
-
-    $.fn.feedback = function (message) {
-        if (message) {
-            this.addClass('is-invalid').next('.invalid-feedback').text(message);
-        } else {
-            this.removeClass('is-invalid');
-        }
-        return this;
-    }
-
-    $.fn.replaceText = function (searchvalue, newvalue) {
-        var text = this.text();
-        if (text !== undefined) {
-            this.text(text.replace(searchvalue, newvalue));
-        }
-        return this;
-    }
-
-}(jQuery));
-
-	</script>
-	
-    <script src="{{site.url}}/client/login.js"></script>
-    <script src="{{site.url}}/client/client1.js"></script>
-	
-    <script src="{{site.url}}/client/data.js"></script>
-	
-</div>
-    <script src="{{site.url}}/client/init.js"></script>
-
-    <!-- END --></div></div>
-	</body>
-	
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130238613-2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-130238613-2');
-</script>
-
-<script>
-function play() {
-	game.style.display = 'inline-block';
-	login.style.display = 'none';	
-}
-</script>
-</body>
-</html>
+</center>
