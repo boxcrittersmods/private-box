@@ -1,9 +1,9 @@
 var BoxCritters = (function() {
 	/*
-	* Event List
-	* "click"  (x,y) - Dispatached when the user clicks
-	* "update" regulary calling event 
-	*/
+	 * Event List
+	 * "click"  (x,y) - Dispatached when the user clicks
+	 * "update" regulary calling event
+	 */
 	var eventHandler = new EventHandler();
 
 	function Artwork(t) {
@@ -117,7 +117,7 @@ var BoxCritters = (function() {
 			(this.balloons = new createjs.Container()),
 			(this.nicknames = new createjs.Container()),
 			this.game.addEventListener("tick", function(t) {
-				eventHandler.dispatchEvent("update",t);
+				eventHandler.dispatchEvent("update", t);
 			}),
 			e.artwork &&
 				e.artwork.sprites &&
@@ -191,205 +191,211 @@ var BoxCritters = (function() {
 	function World(r, t, o) {
 		var e = this;
 		(this.socket = r),
-		(this.artwork = new Artwork(t)),
-		(this.room = void 0),
-		//(this.events = new Events(r, e, void 0)),
-		(this.events = eventHandler),
-		(this.stage = new createjs.Stage(o));
+			(this.artwork = new Artwork(t)),
+			(this.room = void 0),
+			//(this.events = new Events(r, e, void 0)),
+			(this.events = eventHandler),
+			(this.stage = new createjs.Stage(o));
 
-
-		(this.stage.on("stagemousedown", function(t) {
+		this.stage.on("stagemousedown", function(t) {
 			var o = Math.floor(t.stageX),
 				e = Math.floor(t.stageY);
 			eventHandler.dispatchEvent("click", {
-				x:o,
-				y:e
+				x: o,
+				y: e
 			});
-		})),
-		(createjs.Ticker.framerate = 60),
-		createjs.Ticker.on("tick", function(t) {
-			e.stage.update(t);
 		}),
-		void 0 !== r && this.socketHandler(r);
+			(createjs.Ticker.framerate = 60),
+			createjs.Ticker.on("tick", function(t) {
+				e.stage.update(t);
+			}),
+			void 0 !== r && this.socketHandler(r);
 		void 0 !== eventHandler && this.eventHandler(eventHandler);
 	}
 	(Room.prototype.sortDepth = function() {
 		this.game.children.sort(sortDepth);
 	}),
-	(Room.prototype.addPlayer = function(t) {
-		var o = t.i;
-		if (null == this.playerlist[o]) {
-			var e = new Player();
-			if (
-				((e.balloonX = this.artwork.character.balloonX),
-				(e.balloonY = this.artwork.character.balloonY),
-				t.c && this.artwork.characters[t.c])
-			)
-				var r = this.artwork.characters[t.c].clone();
-			else r = this.artwork.character.clone();
-			this.artwork.shadow && e.addChild(this.artwork.shadow.clone()),
-				this.artwork.ring,
-				e.addChild(r),
-				this.artwork.crosshair,
-				void 0 !== t.s && 0 < t.s && (e.speed = t.s),
-				(e.x = t.x),
-				(e.y = t.y),
-				e.setCharacter(r),
-				this.game.addChild(e);
-			var a = new createjs.Container();
-			(a.x = t.x), (a.y = t.y), (e.balloon = a), this.balloons.addChild(a);
-			var i = new createjs.Container();
-			(i.x = t.x), (i.y = t.y);
-			var n = new createjs.Text(t.n, "12px Arial", "#000000");
-			(n.textAlign = "center"),
-				(n.lineWidth = 100),
-				(n.y = 15),
-				i.addChild(n),
-				(e.nickname = i),
-				this.nicknames.addChild(i),
-				this.stage.update(),
-				(this.playerlist[o] = e);
-		}
-	}),
-	(Room.prototype.addBalloon = function(t) {
-		var o = this.playerlist[t.i],
-			e = new createjs.Container(),
-			r = new createjs.Text(t.m, "12px Arial", "#000000");
-		var log = document.getElementById("chatlogArea").value;
-		document.getElementById("chatlogArea").value =
-			t.n + " says: " + t.m + "\n" + log;
-		//e && e.balloon.showMessage(t)
-		(r.textAlign = "center"), (r.lineWidth = 100);
-		var a = r.getBounds(),
-			i = createBalloon(100, a.height);
-		e.addChild(i, r), (e.y = 0 - a.height - o.balloonY), o.balloon.addChild(e);
-		var n = this;
-		setTimeout(function() {
-			o.balloon.removeChild(e), n.stage.update();
-		}, 5e3),
-			this.stage.update();
-	}),
-	(Room.prototype.removePlayer = function(t) {
-		console.log("removePlayer", t), console.log(this.playerlist);
-		var o = this.playerlist[t.i];
-		this.game.removeChild(o),
-		this.balloons.removeChild(o.balloon),
-		this.nicknames.removeChild(o.nickname),
-		delete this.playerlist[t.i],
-		this.stage.update(),
-		console.log(this.playerlist);
-	}),
-	(Room.prototype.movePlayer = function(t) {
-		var o = this.playerlist[t.i];
-		o.isMoving = !0;
-		var e = findDirection(t.r);
-		o.updateDirection(e), o.updateAnimation("walk");
-		var r = calculateDistance(o.x, o.y, t.x, t.y) * o.speed;
-		(o.tween = createjs.Tween.get(o, {
-			override: !0
-		})
-		.to(
-			{
-				x: t.x,
-				y: t.y
-			},
-			r,
-			createjs.Ease.linear
-		)
-		.call(function() {
-			(this.isMoving = !1),
-				o.updateAnimation("stand"),
-				(o.nickname.x = o.x),
-				(o.nickname.y = o.y),
-				(o.balloon.x = o.x),
-				(o.balloon.y = o.y);
-		})
-		.addEventListener("change", function() {
-			(o.nickname.x = o.x),
-				(o.nickname.y = o.y),
-				(o.balloon.x = o.x),
-				(o.balloon.y = o.y);
-		})),
-		this.stage.update();
-	}),
-
-	//World Events
-	(World.prototype.clickEvent = function(p) {
-		this.socket.emit("click", p);
-	}),
-	(World.prototype.updateEvent = function(t) {
-		t.target.children.sort(sortDepth);
-	}),
-	(World.prototype.eventHandler = function(o) {
-		//Setup Events
-		(o.addEventListener("click",this,this.clickEvent)),
-		(o.addEventListener("update",this,this.updateEvent));
-	}),
-	(World.prototype.initPlugins = function() {
-		//Init Plugins
-		Object.values(Plugins).forEach(p=>{
-			p.onInit();
-		})
-	}),
-
-
-	(World.prototype.setStage = function(t) {
-		this.stage = new createjs.Stage(t);
-	}),
-	(World.prototype.socketHandler = function(o) {
-		var e = this;
-		o.on("connect", function() {}),
-		o.on("disconnect", function() {
-			console.log("DISCONNECT");
+		(Room.prototype.addPlayer = function(t) {
+			var o = t.i;
+			if (null == this.playerlist[o]) {
+				var e = new Player();
+				if (
+					((e.balloonX = this.artwork.character.balloonX),
+					(e.balloonY = this.artwork.character.balloonY),
+					t.c && this.artwork.characters[t.c])
+				)
+					var r = this.artwork.characters[t.c].clone();
+				else r = this.artwork.character.clone();
+				this.artwork.shadow && e.addChild(this.artwork.shadow.clone()),
+					this.artwork.ring,
+					e.addChild(r),
+					this.artwork.crosshair,
+					void 0 !== t.s && 0 < t.s && (e.speed = t.s),
+					(e.x = t.x),
+					(e.y = t.y),
+					e.setCharacter(r),
+					this.game.addChild(e);
+				var a = new createjs.Container();
+				(a.x = t.x), (a.y = t.y), (e.balloon = a), this.balloons.addChild(a);
+				var i = new createjs.Container();
+				(i.x = t.x), (i.y = t.y);
+				var n = new createjs.Text(t.n, "12px Arial", "#000000");
+				(n.textAlign = "center"),
+					(n.lineWidth = 100),
+					(n.y = 15),
+					i.addChild(n),
+					(e.nickname = i),
+					this.nicknames.addChild(i),
+					this.stage.update(),
+					(this.playerlist[o] = e);
+			}
 		}),
-		o.on("login", function(t) {
-			console.log("login", t),
-				o.emit("joinRoom", {
-					roomId: "tavern"
+		(Room.prototype.addBalloon = function(t) {
+			var o = this.playerlist[t.i],
+				e = new createjs.Container(),
+				r = new createjs.Text(t.m, "12px Arial", "#000000");
+			var log = document.getElementById("chatlogArea").value;
+			document.getElementById("chatlogArea").value =
+				t.n + " says: " + t.m + "\n" + log;
+			//e && e.balloon.showMessage(t)
+			(r.textAlign = "center"), (r.lineWidth = 100);
+			var a = r.getBounds(),
+				i = createBalloon(100, a.height);
+			e.addChild(i, r),
+				(e.y = 0 - a.height - o.balloonY),
+				o.balloon.addChild(e);
+			var n = this;
+			setTimeout(function() {
+				o.balloon.removeChild(e), n.stage.update();
+			}, 5e3),
+				this.stage.update();
+		}),
+		(Room.prototype.removePlayer = function(t) {
+			console.log("removePlayer", t), console.log(this.playerlist);
+			var o = this.playerlist[t.i];
+			this.game.removeChild(o),
+				this.balloons.removeChild(o.balloon),
+				this.nicknames.removeChild(o.nickname),
+				delete this.playerlist[t.i],
+				this.stage.update(),
+				console.log(this.playerlist);
+		}),
+		(Room.prototype.movePlayer = function(t) {
+			var o = this.playerlist[t.i];
+			o.isMoving = !0;
+			var e = findDirection(t.r);
+			o.updateDirection(e), o.updateAnimation("walk");
+			var r = calculateDistance(o.x, o.y, t.x, t.y) * o.speed;
+			(o.tween = createjs.Tween.get(o, {
+				override: !0
+			})
+				.to(
+					{
+						x: t.x,
+						y: t.y
+					},
+					r,
+					createjs.Ease.linear
+				)
+				.call(function() {
+					(this.isMoving = !1),
+						o.updateAnimation("stand"),
+						(o.nickname.x = o.x),
+						(o.nickname.y = o.y),
+						(o.balloon.x = o.x),
+						(o.balloon.y = o.y);
+				})
+				.addEventListener("change", function() {
+					(o.nickname.x = o.x),
+						(o.nickname.y = o.y),
+						(o.balloon.x = o.x),
+						(o.balloon.y = o.y);
+				})),
+				this.stage.update();
+		}),
+		//World Events
+		(World.prototype.clickEvent = function(p) {
+			this.socket.emit("click", p);
+		}),
+		(World.prototype.updateEvent = function(t) {
+			t.target.children.sort(sortDepth);
+		}),
+		(World.prototype.eventHandler = function(o) {
+			//Setup Events
+			o.addEventListener("click", this, this.clickEvent),
+				o.addEventListener("update", this, this.updateEvent);
+		}),
+		(World.prototype.initPlugins = function() {
+			//Init Plugins
+			Object.values(Plugins).forEach(p => {
+				p.onInit();
+			});
+		}),
+		(World.prototype.setStage = function(t) {
+			this.stage = new createjs.Stage(t);
+		}),
+		(World.prototype.socketHandler = function(o) {
+			var e = this;
+			o.on("connect", function() {}),
+				o.on("disconnect", function() {
+					console.log("DISCONNECT");
+				}),
+				o.on("login", function(t) {
+					console.log("login", t),
+						o.emit("joinRoom", {
+							roomId: "tavern"
+						});
+				}),
+				o.on("joinRoom", function(t) {
+					console.log("joinRoom", t), e.createRoom(t, !1);
+				}),
+				o.on("A", function(t) {
+					console.info("A", t),
+						e.room.addPlayer(t),
+						eventHandler.dispatchEvent("playerJoin", t);
+				}),
+				o.on("R", function(t) {
+					console.info("R", t),
+						e.room.removePlayer(t),
+						eventHandler.dispatchEvent("playerLeave", t);
+				}),
+				o.on("P", function(t) {
+					console.info("P", t),
+						e.room.movePlayer(t),
+						eventHandler.dispatchEvent("playerMove", t);
+				}),
+				o.on("M", function(t) {
+					console.info("M", t),
+						e.room.addBalloon(t),
+						eventHandler.dispatchEvent("playerMessage", t);
 				});
 		}),
-		o.on("joinRoom", function(t) {
-			console.log("joinRoom", t), e.createRoom(t, !1);
+		(World.prototype.login = function(t) {
+			console.log("login", t),
+				this.initPlugins(),
+				this.socket.open(),
+				this.socket.emit("login", {
+					username: t,
+					ticket: "KJ82IqhwIu28"
+				});
 		}),
-		o.on("A", function(t) {
-			console.info("A", t), e.room.addPlayer(t),eventHandler.dispatchEvent("playerJoin",t);
+		(World.prototype.sendMessage = function(t) {
+			console.log("sendMessage", t),
+				this.socket.emit("sendMessage", {
+					message: t
+				});
 		}),
-		o.on("R", function(t) {
-			console.info("R", t), e.room.removePlayer(t),eventHandler.dispatchEvent("playerLeave",t);
-		}),
-		o.on("P", function(t) {
-			console.info("P", t), e.room.movePlayer(t),eventHandler.dispatchEvent("playerMove",t);
-		}),
-		o.on("M", function(t) {
-			console.info("M", t), e.room.addBalloon(t),eventHandler.dispatchEvent("playerMessage",t);
+		(World.prototype.createRoom = function(t) {
+			console.log("createRoom", t),
+				(this.room = new Room(this.stage, this.artwork, t, !1));
 		});
-	}),
-	(World.prototype.login = function(t) {
-		console.log("login", t),
-		this.initPlugins(),
-		this.socket.open(),
-		this.socket.emit("login", {
-			username: t,
-			ticket: "KJ82IqhwIu28"
-		});
-	}),
-	(World.prototype.sendMessage = function(t) {
-		console.log("sendMessage", t),
-		this.socket.emit("sendMessage", {
-			message: t
-		});
-	}),
-	(World.prototype.createRoom = function(t) {
-		console.log("createRoom", t),
-		(this.room = new Room(this.stage, this.artwork, t, !1));
-    });
-    
-    return {
+
+	return {
 		eventHandler,
-        Artwork,
-        Events,
-        Player,
-        Room,
-        World
-    }
+		Artwork,
+		Events,
+		Player,
+		Room,
+		World
+	};
 })();
