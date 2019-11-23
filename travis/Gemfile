@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 ruby RUBY_VERSION
 
-gem 'github-pages', group: :jekyll-plugins
+gem 'github-pages', group: :jekyll_plugins
 gem 'nokogirl',">=1.8.5"
 
 group :test do
