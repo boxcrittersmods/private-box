@@ -82,6 +82,7 @@ typings/
 .nuxt
 dist
 
+
 # Gatsby files
 .cache/
 # Comment in the public line in if your project uses Gatsby and *not* Next.js
@@ -103,8 +104,31 @@ dist
 # TernJS port file
 .tern-port
 
-# Jekyll  
+# Jekyll
 _site/
-.sass-cache/
-.jekyll-cache/
+*-cache/
 .jekyll-metadata
+
+# Ruby
+.bundle/
+.byebug_history
+.ruby-gemset
+.ruby-version
+*.gem
+Gemfile.lock
+
+# Files
+.analysis
+.DS_Store
+*.swp
+*~
+
+# Folders
+/vendor
+bbin/
+bin/
+coverage
+gh-pages/
+pkg/
+test/dest
+tmp/*
