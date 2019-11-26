@@ -22,5 +22,5 @@ var hamster_data = {
 
 var settings = {
     character: hamster_data,
-    roomPath: 'http://localhost:3000/media/rooms/'
+    roomPath: SERVER_URL + '/media/rooms/'
 };
