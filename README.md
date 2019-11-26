@@ -1,55 +1,60 @@
 # Private Box
-Alternative client for Box Critters.
-![screenshot](https://cdn.discordapp.com/attachments/632604108024578059/633333071114141696/unknown.png)
-# Table of Contents
-TODO: Optionally, include a table of contents in order to allow other people to quickly naviagte especially long or detailed READMEs.
+Alternative client and server for Box Critters.
+![screenshot](https://cdn.discordapp.com/attachments/567030108003631108/648901762748776448/private_box.png)
 
-## Getting Started
-These instructions will get you a copy of the project up and running on your local machine. See deployment for notes on how to deploy the project on a live system.
+## Getting started
 
 ### Prerequisites
-(Preperatrion to install)
+To use Private Box you need:
+* Ruby >= 2.4.0
+* Node.js >= 10.16.3
 
 ### Installation
-Installation is the next section in an effective README. Tell other users how to install your project locally. Optionally, include a gif to make the process even more clear for other people.
+First, clone or download the repo, then, if you are on *nix/UNIX-Like (Linux, BSD) systems that supports `make`, do:
+```sh
+make deps
+```
+on the command line.
+If you are on Windows or similar, you can skip this above.
 
 ## Usage
-TODO: The next section is usage, in which you instruct other people on how to use your project after they’ve installed it. This would also be a good place to include screenshots of your project in action.
-
-## Running the tests
-How to test wheather the product works
-
-## Deployment
-Add additional notes about how to deploy this on a live system
+To start the WebSocket server and the client, if you are on *nix/UNIX-Like systems, run:
+```sh
+make
+```
+Else, if you are on Windows, run
+```batch
+_start_server.bat
+```
+to start the WebSocket server, and
+```batch
+_start_client.bat
+```
+to start the client.
+Then go to https://localhost:4000 and see the magick!
 
 ## Built With
-* List of things used to build product
+* EaselJS (CreateJS)
+* Jekyll
+* Node.js
+* Express.js
+* Socket.IO
 
-## Contributing
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+## Versioning
+We use _Box Critters versioning_ (client- 1, 23, 5678, etc.) :stuck_out_tongue:.
 
-Larger projects often have sections on contributing to their project, in which contribution instructions are outlined. Sometimes, this is a separate file. If you have specific contribution preferences, explain them so that other developers know how to best contribute to your work. To learn more about how to help others contribute, check out the guide for (setting guidelines for repository contributors)[https://help.github.com/articles/setting-guidelines-for-repository-contributors/].
-
-## Versionin
-Say what versioning method you use.
-
-example:
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/USER/REPO/tags).
-
-## Authors
-* **AuthorName** - *What they do* - [USER](https://github.com/USER)
-* **AuthorName** - *What they do* - [USER](https://github.com/USER)
-* **AuthorName** - *What they do* - [USER](https://github.com/USER)
-
-See also the list of [contributors](https://github.com/USER/REPO/contributors) who participated in this project.
+## Contributors
+* [tumble1999](https://github.com/tumble1999)
+* [Fl1nns](https://github.com/Fl1nns)
+* [Eribetra](https://github.com/Eribetra)
+* [slaggo](https://github.com/slaggo)
+* [Yutyo](https://github.com/Yutyo)
+* [Alvarito050506](https://github.com/Alvarito050506)
 
 ## License
-TODO: Finally, include a section for the license of your project. For more information on choosing a license, check out GitHub’s [licensing guide](http://choosealicense.com/)!
-
+Private Box by the Box Critters Modding Community is licensed under the Mozilla Public License version 2.0 (MPL-v2.0). For more info see the [LICENSE](https://github.com/boxcritters/private-box/blob/master/LICENSE) file.
 
 ## Acknowledgments
-* [README Template](https://github.com/tumblenet/repository-template) by [tumble1999](github.com/tumble1999]
-
-* Hat tip to anyone who's code was used
+* [README Template](https://github.com/tumblenet/repository-template) by [tumble1999](https://github.com/tumble1999)
 * Inspiration
-* etc
+* etc.

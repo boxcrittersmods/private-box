@@ -101,4 +101,8 @@ function play() {
 	game.style.display = 'inline-block';
 	login.style.display = 'none';	
 }
+var textarea = document.getElementById("chatlogArea");
+setInterval(function () {
+	textarea.scrollTop = textarea.scrollHeight;
+}, 1000);
 </script>
