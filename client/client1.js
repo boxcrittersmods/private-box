@@ -1,4 +1,5 @@
 var BoxCritters = (function() {
+
 	/*
 	 * Event List
 	 * "click"  (x,y) - Dispatached when the user clicks
@@ -95,6 +96,7 @@ var BoxCritters = (function() {
 		}),
 		(Player.prototype.updateDirection = function(t) {
 			this.direction = t;
+			console.log(t);
 		}),
 		(Player.prototype.updateRotation = function(t) {
 			this.character.rotation = t;
@@ -102,9 +104,7 @@ var BoxCritters = (function() {
 		(Player.prototype.updateAnimation = function(t) {
 			void 0 !== t && (this.animation = t),
 				this.hasFrames &&
-					(this.isMoving
-						? this.character.gotoAndPlay("walk" + this.direction)
-						: this.character.gotoAndPlay("stand" + this.direction));
+					(this.character.gotoAndPlay("stand" + this.direction));
 		});
 	var dpr = window.devicePixelRatio;
 
@@ -158,6 +158,7 @@ var BoxCritters = (function() {
 		)
 			for (i = 0; i < e.playerlist.length; i++)
 				this.addPlayer(e.playerlist[i], this.useDirection);
+		this.coins = new Coins(this.stage);
 	}
 
 	function sortDepth(t, o) {
@@ -212,6 +213,21 @@ var BoxCritters = (function() {
 			void 0 !== r && this.socketHandler(r);
 		void 0 !== eventHandler && this.eventHandler(eventHandler);
 	}
+	function Coins(s, q)
+	{
+		var coins_container = new createjs.Container();
+		var coins_bg = new createjs.Bitmap("/media/ui/coins.png");
+		var coins_number = new createjs.Text(q || 100, "20px Luckiest Guy", "#fbd205");
+		coins_bg.x = 5;
+		coins_bg.y = 5;
+		coins_bg.scaleX = 0.35;
+		coins_bg.scaleY = 0.35;
+		coins_number.textAlign = "center";
+		coins_number.textBaseline = "middle";
+		coins_number.setTransform(55 + coins_bg.x, coins_bg.y + 22);
+		coins_container.addChild(coins_bg, coins_number);
+		s.addChild(coins_container);
+	}
 	(Room.prototype.sortDepth = function() {
 		this.game.children.sort(sortDepth);
 	}),
@@ -256,7 +272,7 @@ var BoxCritters = (function() {
 				r = new createjs.Text(t.m, "12px Arial", "#000000");
 			var log = document.getElementById("chatlogArea").value;
 			document.getElementById("chatlogArea").value =
-				t.n + " says: " + t.m + "\n" + log;
+				log + o.nickname.children[0].text + " says: " + t.m + "\n";
 			//e && e.balloon.showMessage(t)
 			(r.textAlign = "center"), (r.lineWidth = 100);
 			var a = r.getBounds(),
@@ -284,7 +300,7 @@ var BoxCritters = (function() {
 			var o = this.playerlist[t.i];
 			o.isMoving = !0;
 			var e = findDirection(t.r);
-			o.updateDirection(e), o.updateAnimation("walk");
+			o.updateDirection(e), o.updateAnimation("stand");
 			var r = calculateDistance(o.x, o.y, t.x, t.y) * o.speed;
 			(o.tween = createjs.Tween.get(o, {
 				override: !0

@@ -1,6 +1,8 @@
 ---
 layout: default
 ---
+
+<link href="https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap" rel="stylesheet">
 <div id="login" class="login container mb-4" style="background-color:#EEEEEE;">
     <center><a href="http://boxcritters.github.io"><img src="logo.png" alt="" height="125"></a></center>
     <div class="card m-2">
@@ -29,8 +31,8 @@ layout: default
                 <input id="chat-message" type="text" class="form-control" maxlength="48">
                 <span class="input-group-btn"><button class="btn btn-primary chat-btn">Send</button></span>
             </div>
-            <div class="row justify-content-center chatlog">
-                <textarea id="chatlogArea" style="width: 75%;border:0;background-color: rgba(0,0,0,0);"></textarea>
+            <div class="row justify-content-center chatlog" style="padding: 1em;">
+                <textarea id="chatlogArea" style="width: 75%;border:0;background-color: rgba(0,0,0,0);resize: none;" rows="3" readonly></textarea>
             </div>
         </div>
 </center>

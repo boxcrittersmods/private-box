@@ -1,40 +1,26 @@
 var hamster_data = {
     images: ["hamster.png"],
-    frames: [[2, 2, 90, 120], [92, 2, 90, 120], [182, 2, 90, 120], [272, 2, 90, 120], [362, 2, 90, 120],
-                 [2, 122, 90, 120], [92, 122, 90, 120], [182, 122, 90, 120], [272, 122, 90, 120], [362, 122, 90, 120],
-                 [2, 242, 90, 120], [92, 242, 90, 120], [182, 242, 90, 120], [272, 242, 90, 120], [362, 242, 90, 120],
-                 [2, 362, 90, 120], [92, 362, 90, 120], [182, 362, 90, 120], [272, 362, 90, 120], [362, 362, 90, 120],
-                 [2, 482, 90, 120], [92, 482, 90, 120], [182, 482, 90, 120], [272, 482, 90, 120], [362, 482, 90, 120],
-                 [2, 602, 90, 120], [92, 602, 90, 120], [182, 602, 90, 120], [272, 602, 90, 120], [362, 602, 90, 120]],
+    frames: [[2, 2, 90, 120], [2, 122, 90, 120], [2, 242, 90, 120], [2, 362, 90, 120], [2, 602, 90, 120], [92, 602, 90, 120], [182, 602, 90, 120]],
     animations: {
-        "stand4": [0],
-        "stand5": [5],
-        "stand6": [5],
-        "stand7": [10],
-        "stand0": [15],
-        "stand1": [20],
-        "stand2": [25],
-        "stand3": [25],
-        "walk4": [0, 4],
-        "walk5": [5, 9],
-        "walk6": [5, 9],
-        "walk7": [10, 14],
-        "walk0": [15, 19],
-        "walk1": [20, 24],
-        "walk2": [25, 29],
-        "walk3": [25, 29]
+        "stand4": [0], // South - Front
+        "stand5": [1],
+        "stand6": [1], // South West - Left - no ok
+        "stand7": [2],
+        "stand0": [3], // North - Back
+        "stand1": [1],
+        //"stand2": [4],
+        "stand3": [4] // South East - ok
     },
-
-    scaleX: .5, //90 big hamster | 5 normal critter
-    scaleY: .5, //90 big hamster | 5 normal critter
+    scaleX: .6, //90 big hamster | 5 normal critter
+    scaleY: .6, //90 big hamster | 5 normal critter
     regX: 45,
     regY: 100,
     framerate: 24,
-    balloonY: 60, //80 big hamster | 60 normal critter
+    balloonY: 80, //80 big hamster | 60 normal critter
     balloonX: 0
 };
 
 var settings = {
     character: hamster_data,
-    roomPath: './media/rooms/'
+    roomPath: 'http://localhost:3000/media/rooms/'
 };
