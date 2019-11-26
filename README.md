@@ -38,6 +38,7 @@ Then go to https://localhost:4000 and see the magick!
 * Jekyll
 * Node.js
 * Express.js
+* Socket.IO
 
 ## Versioning
 We use _Box Critters versioning_ (client- 1, 23, 5678, etc.) :stuck_out_tongue:.
