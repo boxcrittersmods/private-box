@@ -6,4 +6,4 @@ bundle exec jekyll build
 
 echo ""
 echo "HTML PROOFER"
-bundle exec htmlproofer ./_site --disable-external --alt-ignore '/.*/' --href-ignore '#'
+bundle exec htmlproofer ./_site --disable-external --alt-ignore '/.*/' --allow-hash-href
