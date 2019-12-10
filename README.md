@@ -6,7 +6,6 @@ Alternative client and server for Box Critters.
 
 ### Prerequisites
 To use Private Box you need:
-* Ruby >= 2.4.0
 * Node.js >= 10.16.3
 
 ### Installation
@@ -20,25 +19,21 @@ If you are on Windows or similar, you can skip this above.
 ## Usage
 To start the WebSocket server and the client, if you are on *nix/UNIX-Like systems, run:
 ```sh
-make
+make dev
 ```
 Else, if you are on Windows, run
 ```batch
-_start_server.bat
+_start.bat
 ```
-to start the WebSocket server, and
-```batch
-_start_client.bat
-```
-to start the client.
-Then go to https://localhost:4000 and see the magick!
+to start the WebSocket server and the client.
+Then go to https://localhost:3000 and see the magick!
 
 ## Built With
 * EaselJS (CreateJS)
-* Jekyll
 * Node.js
 * Express.js
 * Socket.IO
+* doubleb.js
 
 ## Versioning
 We use _Box Critters versioning_ (client- 1, 23, 5678, etc.) :stuck_out_tongue:.

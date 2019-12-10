@@ -1,0 +1,8 @@
+{
+	"$input_dir": "client",
+	"$output_dir": "docs",
+	"$exclude": "(.*)(.png|.ico|.xpm)$",
+	"url": "https://boxcritters.github.io/private-box",
+	"server-url": "https://bcmc-private-box.herokuapp.com",
+	"pb-plugins": []
+}

@@ -1,0 +1,32 @@
+{
+	"manifest": [
+		{
+			"id": "coins_bg",
+			"src": "https://boxcritters.github.io/private-box/media/ui/coins.png"
+		},
+		{
+			"id": "tavern_bg",
+			"src": "https://boxcritters.github.io/private-box/media/rooms/tavern/tavern_bg.png"
+		},
+		{
+			"id": "tavern_fg",
+			"src": "https://boxcritters.github.io/private-box/media/rooms/tavern/tavern_fg.png"
+		},
+		{
+			"id": "tavern_ss",
+			"src": "https://boxcritters.github.io/private-box/media/rooms/tavern/tavern_ss.png"
+		},
+		{
+			"id": "halloween-tavern_bg",
+			"src": "https://boxcritters.github.io/private-box/media/rooms/halloween-tavern/halloween-tavern_bg.png"
+		},
+		{
+			"id": "halloween-tavern_fg",
+			"src": "https://boxcritters.github.io/private-box/media/rooms/halloween-tavern/halloween-tavern_fg.png"
+		},
+		{
+			"id": "halloween-tavern_ss",
+			"src": "https://boxcritters.github.io/private-box/media/rooms/halloween-tavern/halloween-tavern_ss.png"
+		}
+	]
+}

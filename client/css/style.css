@@ -1,0 +1,44 @@
+body
+{
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+}
+
+span, p, div
+{
+	user-select: none;
+	-khtml-user-select: none;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	cursor: default;
+}
+
+#game, #chatlog
+{
+	display: none;
+}
+
+input:invalid, textarea:invalid
+{
+	background-color: #ffffff;
+}
+
+.center
+{
+	text-align: center;
+}
+
+#chatlog
+{
+	width: 75%;
+	border:0;
+	background-color: rgba(0, 0, 0, 0);
+	resize: none;
+}
+
+#error
+{
+	display: none;
+}

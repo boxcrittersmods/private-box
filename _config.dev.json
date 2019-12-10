@@ -1,0 +1,8 @@
+{
+	"$input_dir": "client",
+	"$output_dir": "docs",
+	"$exclude": "(.*)(.png|.ico|.xpm)$",
+	"url": "http://localhost:3000",
+	"server-url": "http://localhost:3000",
+	"pb-plugins": []
+}

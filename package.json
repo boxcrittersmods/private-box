@@ -18,8 +18,9 @@
   },
   "homepage": "https://github.com/boxcritters/private-box-server#readme",
   "dependencies": {
+    "doubleb.js": "^0.1.2",
     "express": "^4.17.1",
     "socket.io": "^2.3.0",
-    "tn-webserver": "^1.0.0"
+    "tn-webserver": "^1.0.1"
   }
 }

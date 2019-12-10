@@ -26,8 +26,8 @@ function GetPlayer(nickname) {
 /*****************
  * ROOMS
  *****************/
-var folder = path.join(global.appDir,"./rooms/");
-console.log("ROOMS:",folder)
+var folder = path.join(path.dirname(__filename),"./rooms/");
+console.log("ROOMS:", folder)
 var roomIds = [
     "tavern"
 ]
@@ -42,8 +42,9 @@ function GetHoliday() {
 async function SaveNewRoom(id) {
     var name = id;
     var holiday = GetHoliday();
-    if(holiday){
-        var holidayJson = name = name + "-" + holiday;
+    if (holiday)
+    {
+        var holidayJson = name = holiday + "-" + name;
         if(JSONTools.JSONExists(holidayJson)) {
             name = holidayJson;
         }
