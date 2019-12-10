@@ -2,31 +2,31 @@
 	"manifest": [
 		{
 			"id": "coins_bg",
-			"src": "http://localhost:3000/media/ui/coins.png"
+			"src": "https://boxcritters.github.io/private-box/media/ui/coins.png"
 		},
 		{
 			"id": "tavern_bg",
-			"src": "http://localhost:3000/media/rooms/tavern/tavern_bg.png"
+			"src": "https://boxcritters.github.io/private-box/media/rooms/tavern/tavern_bg.png"
 		},
 		{
 			"id": "tavern_fg",
-			"src": "http://localhost:3000/media/rooms/tavern/tavern_fg.png"
+			"src": "https://boxcritters.github.io/private-box/media/rooms/tavern/tavern_fg.png"
 		},
 		{
 			"id": "tavern_ss",
-			"src": "http://localhost:3000/media/rooms/tavern/tavern_ss.png"
+			"src": "https://boxcritters.github.io/private-box/media/rooms/tavern/tavern_ss.png"
 		},
 		{
 			"id": "halloween-tavern_bg",
-			"src": "http://localhost:3000/media/rooms/halloween-tavern/halloween-tavern_bg.png"
+			"src": "https://boxcritters.github.io/private-box/media/rooms/halloween-tavern/halloween-tavern_bg.png"
 		},
 		{
 			"id": "halloween-tavern_fg",
-			"src": "http://localhost:3000/media/rooms/halloween-tavern/halloween-tavern_fg.png"
+			"src": "https://boxcritters.github.io/private-box/media/rooms/halloween-tavern/halloween-tavern_fg.png"
 		},
 		{
 			"id": "halloween-tavern_ss",
-			"src": "http://localhost:3000/media/rooms/halloween-tavern/halloween-tavern_ss.png"
+			"src": "https://boxcritters.github.io/private-box/media/rooms/halloween-tavern/halloween-tavern_ss.png"
 		}
 	]
 }

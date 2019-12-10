@@ -225,7 +225,7 @@ var BoxCritters = (function() {
 	function Coins(s, q)
 	{
 		var coins_container = new createjs.Container();
-		var coins_bg = new createjs.Bitmap("http://localhost:3000/media/ui/coins.png");
+		var coins_bg = new createjs.Bitmap("https://boxcritters.github.io/private-box/media/ui/coins.png");
 		var coins_number = new createjs.Text(q || 100, "20px Luckiest Guy", "#fbd205");
 		coins_bg.x = 5;
 		coins_bg.y = 5;
