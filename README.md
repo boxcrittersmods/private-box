@@ -1,5 +1,6 @@
 # Private Box
-Alternative client and server for Box Critters.
+A too for creatimng your own worlds using the box critters engine.
+
 ![screenshot](https://cdn.discordapp.com/attachments/567030108003631108/648901762748776448/private_box.png)
 
 ## Getting started
