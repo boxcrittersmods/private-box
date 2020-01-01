@@ -1,5 +1,4 @@
 # This is a Jekyll configoration file for Github Pages
-
 title: BoxCritters Private Box
 url: https://boxcritters.github.io/private-box
 server-url: https://bcmc-private-box.herokuapp.com
@@ -19,19 +18,15 @@ kramdown:
 
 
 excludes:
-  - lib
   - Gemfile
   - Gemfile.lock
   - node_modules
-  - bower.json
   - "*.sh"
+  - "*.bat"
   - README.md
-  - gulffile.js
   - package.json
-  - vendor
   - ".gitignore"
   - CNAME
-  - icomoon-selection.json
   - server
   - build
   - index.js
