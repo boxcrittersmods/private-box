@@ -1,6 +1,8 @@
 const express = require('express');
 var app = express();
 
-//app.use(express.static(global.appDir));
+/*app.get('*',(req,res)=> {
+	res.send("Working?");
+})*/
 
 module.exports = app;

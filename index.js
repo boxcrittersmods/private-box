@@ -1,6 +1,5 @@
 const path = require('path');
 const WebServer = require('tn-webserver');
-
 global.appDir = path.dirname(require.main.filename);
 
 const app = require('./server/web');
