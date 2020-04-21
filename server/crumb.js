@@ -2,7 +2,8 @@
 
 function loginCrumb(player) {
 	return {
-		playerId: player.id,
+		playerId: player.playerId,
+		critterId: player.critterId,
 		nickname: player.nickname,
 		inventory: player.inventory
 	}
@@ -10,8 +11,9 @@ function loginCrumb(player) {
 
 function playerCrumb(player) {
 	return {
-		i: player.id,
+		i: player.playerId,
 		n: player.nickname,
+		c: player.critterId,
 		x: player.x,
 		y: player.y,
 		r: player.r,
@@ -21,11 +23,11 @@ function playerCrumb(player) {
 
 function roomCrumb(room) {
 	return {
-		roomId: room.id,
-		name: room.json.name,
-		playerlist: room.players.map(p => playerCrumb(p)),
-		height: room.json.height,
-		width: room.json.width,
+		RoomId: room.id,
+		Name: room.json.name,
+		PlayerCrumbs: room.players.map(p => playerCrumb(p)),
+		Height: room.json.height,
+		Width: room.json.width,
 		margin: room.json.margin,
 		minDistance: room.json.minDistance,
 		artwork: room.json.artwork,
@@ -36,7 +38,7 @@ function roomCrumb(room) {
 
 function moveCrumb(player) {
 	return {
-		i: player.id,
+		i: player.playerId,
 		x: player.x,
 		y: player.y,
 		r: player.r
@@ -45,7 +47,7 @@ function moveCrumb(player) {
 
 function messageCrumb(player, message) {
 	return {
-		i: player.id,
+		i: player.playerId,
 		m: message
 	}
 }
@@ -56,7 +58,7 @@ function joinCrumb(player) {
 
 function leaveCrumb(player) {
 	return {
-		i: player.id
+		i: player.playerId
 	}
 }
 

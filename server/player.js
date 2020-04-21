@@ -8,14 +8,15 @@ Rotation
 s
 */
 var lastid = 0
-function generateID() {
+function generateId() {
 	lastid++
 	return lastid.toString()
 }
-function Player(nickname) {
+function Player(playerId) {
 	if (!new.target) throw 'Player() must be called with new'
-	this.id = generateID()
-	this.nickname = nickname
+	this.playerId = generateId()
+	this.critterId = "hamster"
+	this.nickname = "notdone"
 	this.inventory = []
 	this.x = 433
 	this.y = 195

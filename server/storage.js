@@ -8,19 +8,17 @@ const rooms = []
 /*****************
  * Players
  *****************/
-function GetPlayerIndex(nickname) {
-	return players.findIndex(p => p.nickname === nickname)
-}
 
 function SaveNewPlayer(player) {
-	var index = GetPlayerIndex(player.nickname)
+	var index = GetPlayer(player.playerId, true) // true to get index
 	if (index == -1) {
 		players.push(player)
 	}
 }
 
-function GetPlayer(nickname) {
-	return players.find(p => p.nickname === nickname)
+function GetPlayer(playerId, index = false) {
+	return players[index ? 'findIndex' : 'find']
+		(p => p.playerId === playerId)
 }
 
 /*****************
@@ -60,12 +58,9 @@ function InitRooms() {
 	})
 }
 
-function GetRoomIndex(roomId) {
-	return rooms.findIndex(r => r.id === roomId)
-}
-
-function GetRoom(roomId) {
-	return rooms.find(r => r.id === roomId)
+function GetRoom(roomId, index = false) {
+	return rooms[index ? 'findIndex' : 'find']
+		(r => r.id === roomId)
 }
 
 InitRooms()

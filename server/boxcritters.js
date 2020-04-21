@@ -4,18 +4,18 @@ const Room = require('./room')
 const Crumb = require('./crumb')
 const Storage = require('./storage')
 
-function Login(session, { playerId, ticket }) {
-	console.log("login", playerId, ticket)
-	//LoadPlayer
-	session.player = Storage.GetPlayer(playerId)
+function Login(session, ticket) {
+	console.log("login", ticket)
+	session.player //= Storage.GetPlayer() // give playerid
 	if (!session.player) {
-		session.player = new Player(playerId)
+		session.player = new Player() // give playerid
 		Storage.SaveNewPlayer(session.player)
 	}
 	//send out loginCrumb
 	session.socket.emit("login", Crumb.loginCrumb(session.player))
 }
 function JoinRoom(session, roomId) {
+	console.log({session,roomId})
 	if (!session.player) return
 	console.log("joinroom", roomId)
 	//LoadRoom
@@ -27,6 +27,7 @@ function JoinRoom(session, roomId) {
 	//Join Socket Room
 	session.socket.join(roomId)
 	//Emit Room Crumb
+	console.log(session.room, Crumb.roomCrumb(session.room) )
 	session.socket.emit('joinRoom', Crumb.roomCrumb(session.room))
 }
 
