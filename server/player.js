@@ -7,18 +7,11 @@ Xpos
 Rotation
 s
 */
-{
-	var lastid = 0
-	function generateId() {
-		return lastid.toString()
-		lastid++
-	}
-}
-function Player(playerId) {
+function Player(playerId, nickname) {
 	if (!new.target) throw 'Player() must be called with new'
-	this.playerId = generateId()
+	this.playerId = playerId
 	this.critterId = "hamster"
-	this.nickname = "notdone"
+	this.nickname = nickname || "NoName"
 	this.inventory = []
 	this.x = 433
 	this.y = 195

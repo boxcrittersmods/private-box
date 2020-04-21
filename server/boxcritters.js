@@ -1,14 +1,14 @@
-const socketIo = require('socket.io')
+const socketIo = require('socket.io').listen(global.app, {'pingInterval': 100, 'pingTimeout': 10000});
 const Player = require('./player')
 const Room = require('./room')
 const Crumb = require('./crumb')
 const Storage = require('./storage')
 
-function Login(session, ticket) {
-	console.log("login", ticket)
-	session.player //= Storage.GetPlayer() // give playerid
+function Login(session, {playerId, nickname}) {
+	console.log("login", playerId)
+	session.player = Storage.GetPlayer(playerId)
 	if (!session.player) {
-		session.player = new Player() // give playerid
+		session.player = new Player(playerId, nickname)
 		Storage.SaveNewPlayer(session.player)
 	}
 	//send out loginCrumb
@@ -66,8 +66,8 @@ function SetupSession(socket) {
 		room: undefined
 	}
 	socket.emit("connect")
-	socket.on('disconnect', function () {
-		console.log('Client disconnected')
+	socket.on('disconnect', function (reason) {
+		console.log(`Client disconnected: ${reason}`)
 		if (session.room) {
 			session.room.removePlayer(session.player)
 			session.socket.to(session.room.id).emit("R", Crumb.leaveCrumb(session.player))
@@ -77,6 +77,7 @@ function SetupSession(socket) {
 		Login(session, crumb)
 	})
 	socket.on('joinRoom', function (crumb) {
+		console.log(crumb)
 		JoinRoom(session, crumb)
 	})
 	socket.on('click', function (crumb) {
@@ -89,7 +90,7 @@ function SetupSession(socket) {
 
 function SetupSocket(server) {
 	console.log("Setup Socket")
-	var io = socketIo(server, { 'transports': ['websocket'] })
+	var io = socketIo.listen(server, { 'transports': ['websocket'], 'pingInterval': 100, 'pingTimeout': 10000})
 	io.on("connect", SetupSession)
 }
 
