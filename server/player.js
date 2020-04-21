@@ -7,10 +7,12 @@ Xpos
 Rotation
 s
 */
-var lastid = 0
-function generateId() {
-	lastid++
-	return lastid.toString()
+{
+	var lastid = 0
+	function generateId() {
+		return lastid.toString()
+		lastid++
+	}
 }
 function Player(playerId) {
 	if (!new.target) throw 'Player() must be called with new'
