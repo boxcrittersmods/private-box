@@ -47,8 +47,8 @@ function Click(session, { x, y }) {
 	session.player.r = calcAngle(session.player.x, session.player.y, x, y)
 	session.player.x = x
 	session.player.y = y
-	session.socket.to(session.room.id).emit("P", Crumb.moveCrumb(session.player))
-	session.socket.emit("P", Crumb.moveCrumb(session.player))
+	session.socket.to(session.room.id).emit("X", Crumb.moveCrumb(session.player))
+	session.socket.emit("X", Crumb.moveCrumb(session.player)) // might not be neccecary
 }
 function SendMessage(session, { message }) {
 	if (!session.room) return
@@ -86,11 +86,14 @@ function SetupSession(socket) {
 	socket.on('sendMessage', function (crumb) {
 		SendMessage(session, crumb)
 	})
+	socket.on('code', function ({code, options}) {
+		console.log(`Command: ${code}, ${options} from player: ${session.player.nickname}`)
+	})
 }
 
 function SetupSocket(server) {
 	console.log("Setup Socket")
-	var io = socketIo.listen(server, { 'transports': ['websocket'], 'pingInterval': 100, 'pingTimeout': 10000})
+	var io = socketIo.listen(server, { 'transports': ['websocket']/*, 'pingInterval': 100, 'pingTimeout': 10000*/})
 	io.on("connect", SetupSession)
 }
 

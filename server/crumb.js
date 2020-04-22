@@ -1,5 +1,3 @@
-
-
 function loginCrumb(player) {
 	return {
 		playerId: player.playerId,
@@ -16,8 +14,7 @@ function playerCrumb(player) {
 		c: player.critterId,
 		x: player.x,
 		y: player.y,
-		r: player.r,
-		s: player.s
+		r: player.r
 	}
 }
 
@@ -41,7 +38,7 @@ function moveCrumb(player) {
 		i: player.playerId,
 		x: player.x,
 		y: player.y,
-		r: player.r
+		//r: player.r // not used because it's unneccecary and rotation acutally breaks
 	}
 }
 
@@ -50,10 +47,6 @@ function messageCrumb(player, message) {
 		i: player.playerId,
 		m: message
 	}
-}
-
-function joinCrumb(player) {
-	return playerCrumb(player)
 }
 
 function leaveCrumb(player) {

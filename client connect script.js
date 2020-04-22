@@ -7,14 +7,13 @@
  * important values
  */
 var extraPlayerData = { nickname: "" }
-var ip = 'http://localhost:3000/'
+var ip = "http://localhost:3000/"
 var safeWhitelist = ['playerId']
 
 /**
  * code starts
  */
 socket.disconnect() // disconnect to main boxcritters server
-var socketPath = ip
 
 Object.filter = (obj, predicate) =>
 	Object.keys(obj)
@@ -34,7 +33,7 @@ World.prototype.start = function () {
 World.prototype.login = function (t) {
 	socket.open()
 	let loginInfo = myPlayer
-	if (socketPath) {
+	if (ip) {
 		loginInfo = Object.filter(loginInfo, (_, i) => safeWhitelist.includes(i))
 	}
 	loginInfo = Object.assign(loginInfo, extraPlayerData)
@@ -43,7 +42,7 @@ World.prototype.login = function (t) {
 
 if (myPlayer.sessionTicket) {
 
-	var socket = io(socketPath, {
+	var socket = io(ip, {
 		autoConnect: false,
 		transports: ['websocket'],
 		"force new connection": false,
