@@ -1,13 +1,4 @@
-/*
-PLAYER
-playerId
-Nickname
-Ypos
-Xpos
-Rotation
-s
-*/
-function Player(playerId, nickname) {
+module.exports = function (playerId, nickname) {
 	if (!new.target) throw 'Player() must be called with new'
 	this.playerId = playerId
 	this.critterId = "hamster"
@@ -16,7 +7,5 @@ function Player(playerId, nickname) {
 	this.x = 433
 	this.y = 195
 	this.r = 0
-	this.s = 5
+	this.speed = 5
 }
-
-module.exports = Player

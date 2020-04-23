@@ -1,3 +1,5 @@
+"use strict"
+
 var port = process.env.PORT || 3000
 
 var http = require('http')
@@ -12,5 +14,5 @@ server.listen(port, function () {
 })
 
 global.appDir = __dirname
-const boxCritters = require('./server/boxcritters')
-boxCritters(server)
+const main = require('./server/main')
+main(server)

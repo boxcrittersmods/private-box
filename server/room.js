@@ -21,19 +21,11 @@ json:
 			images: Array(string)
 */
 
-
-function Room(id, json) {
+module.exports = function (id, json) {
 	if (!new.target) throw 'Room() must be called with new'
 	this.id = id
 	this.players = []
 	this.json = json
+	this.addPlayer = p => this.players.push(p)
+	this.removePlayer = p => this.players = this.players.filter(v => v !== p)
 }
-Room.prototype.addPlayer = function (player) {
-	this.players.push(player)
-}
-
-Room.prototype.removePlayer = function (player) {
-	this.players = this.players.filter(p => p !== player)
-}
-
-module.exports = Room
