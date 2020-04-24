@@ -4,6 +4,7 @@ module.exports = function({Listener, Player, Room, Crumb, Storage, Commands}) {
 	
 	Commands.speed = function(session, value) {
 		session.player.speed = Number(value)
+		console.log(session.player)
 		return session
 	}
 
@@ -72,5 +73,5 @@ module.exports = function({Listener, Player, Room, Crumb, Storage, Commands}) {
 		this.session.socket.emit("M", Crumb.messageCrumb(this.session.player, message)) // might not be neccecary
 	}
 
-	return {Listener, Player, Room, Crumb, Storage}
+	return {Listener, Player, Room, Crumb, Storage, Commands}
 }

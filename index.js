@@ -14,5 +14,5 @@ server.listen(port, function () {
 })
 
 global.appDir = __dirname
-const main = require('./server/main')
+var {main,world} = require('./server/main')
 main(server)

@@ -25,7 +25,6 @@ function ReadJSON(file) {
 		}
 
 	})
-
 }
 
 module.exports = {
