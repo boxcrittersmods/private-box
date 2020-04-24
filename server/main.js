@@ -4,34 +4,42 @@ const socketIo = require('socket.io').listen(global.app, { 'pingInterval': 100, 
 const JSONTools = require('./json')
 
 function Listener(session) {
-	/* creates socket.on for every listener function
-	*  some sockets aren't neccecary and are stuff like constructor() which may cause issues
-	*  this should be fixed in the future
-	*/
-	for (let i of Object.getOwnPropertyNames(Listener.prototype)) {
+	this.session = session
+
+	// creates socket.on for every listener function
+	// some sockets aren't neccecary and are stuff like constructor() which may cause issues
+	// this should be fixed in the future
+	this.socket = Object.keys(this) // [] // find way for this to be set before initialization
+	for (let i of this.socket) {
 		session.socket.on(i, this[i])
 		console.log(i)
 	}
-	this.session = session
+
+	// run other starter code
+	//this.
 }
 
-const Player = require('./player')
-const Room = require('./room')
-const Crumb = require('./crumb')
-const Storage = require('./storage') // work on this file
-var Commands = {}
-
-world = {Listener, Player, Room, Crumb, Storage, Commands}
+var world = {
+listeners: {},
+Session: function (socket, listeners) {
+	this.socket = socket
+	for (let i of listeners) {
+		this.socket.on(i, this[i])
+		console.log(i)
+	}
+	socket.emit("connect")
+},
+//Player
+// Room: require('./room'),
+//Crumb: require('./crumb'),
+//Storage: require('./storage') // work on this file,
+Commands: {}
+}
 
 function SetupSession(socket) {
 	console.log("Client connected:", socket.id)
-	var session = {
-		socket,
-		player: undefined,
-		room: undefined
-	}
-	socket.emit("connect")
-	var listener = new Listener(session) //listener creates
+	var session = new Session(socket)
+	//var listener = new Listener(session) //listener creates
 }
 
 function main(server) {
@@ -40,8 +48,7 @@ function main(server) {
 }
 
 {
-	/* grab all plugins and pass world through
-	*/
+	// grab all plugins and pass world through
 	let plugins = require('../plugins/RunOrder')
 	for (let i of plugins) {
 		console.log(`loading plugin ${i}`)
@@ -50,4 +57,4 @@ function main(server) {
 	}
 }
 
-module.exports = {main,world}
+module.exports = { main, world }

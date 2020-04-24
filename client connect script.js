@@ -13,6 +13,7 @@ var safeWhitelist = ['playerId']
 /**
  * code starts
  */
+socket.removeAllListeners() // remove listeners that shouldnt be
 socket.disconnect() // disconnect to main boxcritters server
 
 Object.filter = (obj, predicate) =>
@@ -53,30 +54,34 @@ if (myPlayer.sessionTicket) {
 
 	var world = new World('stage', {
 		lobby: 'tavern',
-		critters: '/media/critters11.json',
+		critters: '/data/critters12.json',
+		mascots: '/data/mascots2.json',
 		effects: '/media/effects/effects2.json',
-		items: '/data/items25.json',
-		rooms: '/data/rooms19.json'
+		items: '/data/items26.json',
+		rooms: '/data/rooms20.json'
 	})
 
-	world.commands.game = function () {
-		showGame()
-	}
-	world.commands.nicknames = function () {
-		world.stage.room.toggleNicknames()
-	}
-	world.commands.balloons = function () {
-		world.stage.room.toggleBalloons()
-	}
-	world.commands.darkmode = function () {
-		world.sendCode('darkmode')
-		toggleDarkmode()
-	}
-	world.commands.join = function (options) {
-		var roomId = options[0]
-		world.joinRoom(roomId.toLowerCase())
-	}
+	socket.on('login', function (data) {
+		if (data.error) {
+			document.location.href = '/'
+		} else {
+			$(document).unbind('keypress')
+			$(document).keypress(handleKeypress)
+			$('.chat-btn').click(sendMessage)
+		}
+	})
 
+	socket.on('disconnect', function () {
+		console.log('disconnected')
+		$('#modal').modal({
+			backdrop: 'static'
+		})
+		$('#modal').modal('show')
+		$('#modal .modal-body').text('Disconnect')
+		$('#buttonLogin').click(function () {
+			document.location.reload()
+		})
+	})
 
 } else {
 	console.log('Connection refused!')//document.location.href = '/'

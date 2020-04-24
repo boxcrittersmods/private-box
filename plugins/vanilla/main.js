@@ -1,8 +1,19 @@
 "use strict"
 
-module.exports = function({Listener, Player, Room, Crumb, Storage, Commands}) {
+module.exports = function(world) {
 	
-	Commands.speed = function(session, value) {
+	world.Player = function (playerId, nickname) {
+		this.playerId = playerId
+		this.critterId = "hamster"
+		this.nickname = nickname || "NoName"
+		this.inventory = []
+		this.x = 433
+		this.y = 195
+		this.r = 0
+		this.speed = 5
+	}
+
+	world.Commands.speed = function(session, value) {
 		session.player.speed = Number(value)
 		console.log(session.player)
 		return session
@@ -73,5 +84,5 @@ module.exports = function({Listener, Player, Room, Crumb, Storage, Commands}) {
 		this.session.socket.emit("M", Crumb.messageCrumb(this.session.player, message)) // might not be neccecary
 	}
 
-	return {Listener, Player, Room, Crumb, Storage, Commands}
+	return world
 }
