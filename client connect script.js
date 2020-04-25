@@ -46,9 +46,6 @@ if (myPlayer.sessionTicket) {
 	var socket = io(ip, {
 		autoConnect: false,
 		transports: ['websocket'],
-		"force new connection": false,
-		reconnectionAttempts: 1,
-		timeout: 10000,
 		secure: false
 	})
 

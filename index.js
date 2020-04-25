@@ -13,6 +13,5 @@ server.listen(port, function () {
 	console.log(`Starting server on port: ${port}, directory: ${__dirname}`)
 })
 
-global.appDir = __dirname
 var {main,world} = require('./server/main')
 main(server)

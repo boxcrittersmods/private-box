@@ -13,46 +13,49 @@ module.exports = function(world) {
 		this.speed = 5
 	}
 
-	world.Commands.speed = function(session, value) {
+	world.commands = {}
+
+	world.commands.speed = function(session, value) {
 		session.player.speed = Number(value)
 		console.log(session.player)
 		return session
 	}
 
-	Listener.prototype.code = function({ code, options }) {
-		console.log(`Command: ${code}, ${options} from player: ${this.session.player.nickname}`)
-		console.log(Commands)
-		if (Commands[code]) this.session = Commands[code](this.session, ...options)
+	world.listeners.code = function(session, { code, options }) {
+		console.log(`command: ${code}, ${options} from player: ${session.player.nickname}`)
+		console.log(commands)
+		if (commands[code]) session = commands[code](session, ...options)
 	}
 
-	Listener.prototype.login = function({ playerId, nickname }) {
-		if (!playerId) this.session.socket.disconnect()
+	world.listeners.login = function(session, { playerId, nickname }) {
+		if (!playerId) session.socket.disconnect()
 		console.log("login", playerId)
-		this.session.player = Storage.GetPlayer(playerId)
-		if (!this.session.player) {
-			this.session.player = new Player(playerId, nickname)
-			Storage.SaveNewPlayer(this.session.player)
+		//session.player = Storage.GetPlayer(playerId) // players not yet saved
+		if (true/*!session.player*/) {
+			session.player = new Player(playerId, nickname)
+			//Storage.SaveNewPlayer(session.player)
 		}
-		this.session.socket.emit("login", Crumb.loginCrumb(this.session.player))
+		session.socket.emit("login", Crumb.loginCrumb(session.player))
 	}
 
-	Listener.prototype.disconnect = function(reason) {
-		console.log(`Client disconnected: ${reason}`)
-		if (this.session.room) {
-			this.session.room.removePlayer(this.session.player)
-			this.session.socket.to(this.session.room.id).emit("R", Crumb.leaveCrumb(this.session.player))
+	world.listeners.disconnect = function(session, reason) {
+		console.log(`client disconnected: ${reason}`)
+		if (session.room) {
+			session.room.removePlayer(session.player)
+			session.socket.to(session.room.id).emit("R", Crumb.leaveCrumb(session.player))
+			 
 		}
 	}
-	Listener.prototype.joinRoom = function(roomId) {
-		console.log({ session:this.session, roomId })
-		if (!this.session.player) return
+	world.listeners.joinRoom = function(session, roomId) {
+		console.log({ session, roomId })
+		if (!session.player) return
 
-		this.session.room = Storage.GetRoom(roomId)//LoadRoom
-		this.session.room.addPlayer(this.session.player)
-		this.session.socket.to(roomId).emit("A", Crumb.playerCrumb(this.session.player))//inform other players of join
-		this.session.socket.join(roomId)
-		console.log(this.session.room, Crumb.roomCrumb(this.session.room))//send room
-		this.session.socket.emit('joinRoom', Crumb.roomCrumb(this.session.room))
+		session.room = Storage.GetRoom(roomId)//LoadRoom
+		session.room.addPlayer(session.player)
+		session.socket.to(roomId).emit("A", Crumb.playerCrumb(session.player))//inform other players of join
+		session.socket.join(roomId)
+		console.log(session.room, Crumb.roomCrumb(session.room))//send room
+		session.socket.emit('joinRoom', Crumb.roomCrumb(session.room))
 	}
 
 	/*
@@ -66,22 +69,22 @@ module.exports = function(world) {
 	}
 	*/
 
-	Listener.prototype.click = function({ x, y }) {
-		if (!this.session.room) return
-		if (!this.session.player) return
+	world.listeners.click = function(session, { x, y }) {
+		if (!session.room) return
+		if (!session.player) return
 		console.log("click", x, y)
-		//this.session.player.r = this.calcAngle(this.session.player.x, this.session.player.y, x, y)
-		this.session.player.x = x
-		this.session.player.y = y
-		this.session.socket.to(this.session.room.id).emit("X", Crumb.moveCrumb(this.session.player))
-		this.session.socket.emit("X", Crumb.moveCrumb(this.session.player)) // might not be neccecary
+		//session.player.r = this.calcAngle(session.player.x, session.player.y, x, y)
+		session.player.x = x
+		session.player.y = y
+		session.socket.to(session.room.id).emit("X", Crumb.moveCrumb(session.player))
+		session.socket.emit("X", Crumb.moveCrumb(session.player)) // might not be neccecary
 	}
-	Listener.prototype.sendMessage = function({ message }) {
-		if (!this.session.room) return
-		if (!this.session.player) return
+	world.listeners.sendMessage = function(session, { message }) {
+		if (!session.room) return
+		if (!session.player) return
 		console.log("sendMessage", message)
-		this.session.socket.to(this.session.room.id).emit("M", Crumb.messageCrumb(this.session.player, message))
-		this.session.socket.emit("M", Crumb.messageCrumb(this.session.player, message)) // might not be neccecary
+		session.socket.to(session.room.id).emit("M", Crumb.messageCrumb(session.player, message))
+		session.socket.emit("M", Crumb.messageCrumb(session.player, message)) // might not be neccecary
 	}
 
 	return world
