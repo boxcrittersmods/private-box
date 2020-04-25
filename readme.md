@@ -1,13 +1,24 @@
-# Private Box
-A too for creatimng your own worlds using the box critters engine.
+requires https
+either setup https on your server or host somewhere else like heroku
 
-![screenshot](https://cdn.discordapp.com/attachments/567030108003631108/648901762748776448/private_box.png)
+if you setup https please tell me how you did it because i keep getting ssl errors
+
+port config is in index.js
+run with node.js
+
+on client script, set ip and nickname to your liking
+run client connect script in console on boxcritters
+
+# Private Box
+A tool for creatimng your own worlds using the box critters engine.
+
+<!--![screenshot](https://cdn.discordapp.com/attachments/567030108003631108/648901762748776448/private_box.png)-->
 
 ## Getting started
 
 ### Prerequisites
 To use Private Box you need:
-* Ruby >= 2.4.0
+* ~~Ruby >= 2.4.0~~
 * Node.js >= 10.16.3
 
 ### Installation
@@ -17,7 +28,7 @@ make deps
 ```
 on the command line.
 If you are on Windows or similar, you can skip this above.
-
+<s>
 ## Usage
 To start the WebSocket server and the client, if you are on *nix/UNIX-Like systems, run:
 ```sh
@@ -32,11 +43,11 @@ to start the WebSocket server, and
 _start_client.bat
 ```
 to start the client.
-Then go to https://localhost:4000 and see the magick!
+Then go to https://localhost:4000 and see the magick!</s>
 
 ## Built With
-* EaselJS (CreateJS)
-* Jekyll
+* <s>EaselJS (CreateJS)</s>
+* <s>Jekyll</s>
 * Node.js
 * Express.js
 * Socket.IO
@@ -45,6 +56,8 @@ Then go to https://localhost:4000 and see the magick!
 We use _Box Critters versioning_ (client- 1, 23, 5678, etc.) :stuck_out_tongue:.
 
 ## Contributors
+* [SArpnt](https://github.com/sarpnt)
+
 * [tumble1999](https://github.com/tumble1999)
 * [Fl1nns](https://github.com/Fl1nns)
 * [Eribetra](https://github.com/Eribetra)

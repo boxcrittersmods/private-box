@@ -1,9 +1,17 @@
-const path = require('path');
-const WebServer = require('tn-webserver');
-global.appDir = path.dirname(require.main.filename);
+"use strict"
 
-const app = require('./server/web');
-const boxCritters = require('./server/boxcritters');
+var port = process.env.PORT || 3000
 
-var server = WebServer(app);
-boxCritters(server);
+var http = require('http')
+const path = require('path')
+var express = require('express')
+var app = express()
+var server = http.Server(app)
+app.set('port', port)
+
+server.listen(port, function () {
+	console.log(`Starting server on port: ${port}, directory: ${__dirname}`)
+})
+
+var {main,world} = require('./server/main')
+main(server)

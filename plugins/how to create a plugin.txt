@@ -1,0 +1,9 @@
+set module.export to a function
+function takes one input which is an object containing:
+
+{
+	Listener,
+	
+}
+
+Listener is a class where every function in it is the name of a socket reciever
