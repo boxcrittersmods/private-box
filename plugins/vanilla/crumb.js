@@ -1,6 +1,6 @@
 module.exports = new class {
 
-	loginCrumb(player) {
+	login(player) {
 		return {
 			playerId: player.playerId,
 			critterId: player.critterId,
@@ -9,7 +9,7 @@ module.exports = new class {
 		}
 	}
 
-	playerCrumb(player) {
+	player(player) {
 		return {
 			i: player.playerId,
 			n: player.nickname,
@@ -20,11 +20,11 @@ module.exports = new class {
 		}
 	}
 
-	roomCrumb(room) {
+	room(room) {
 		return {
 			RoomId: room.id,
 			Name: room.json.name,
-			PlayerCrumbs: room.players.map(p => this.playerCrumb(p)),
+			PlayerCrumbs: room.players.map(p => this.player(p)),
 			Height: room.json.height,
 			Width: room.json.width,
 			margin: room.json.margin,
@@ -35,7 +35,7 @@ module.exports = new class {
 		}
 	}
 
-	moveCrumb(player) {
+	move(player) {
 		return {
 			i: player.playerId,
 			x: player.x,
@@ -44,14 +44,14 @@ module.exports = new class {
 		}
 	}
 
-	messageCrumb(player, message) {
+	message(player, message) {
 		return {
 			i: player.playerId,
 			m: message
 		}
 	}
 
-	leaveCrumb(player) {
+	leave(player) {
 		return {
 			i: player.playerId
 		}

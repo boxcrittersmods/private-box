@@ -2,7 +2,18 @@
 
 module.exports = function(world) {
 
-	world.Crumb = require('./crumb')
+	world.crumb = require('./crumb')
+	world.storage = require('./storage')
+	world.Room = function (json, id = json.RoomId) {
+		if (!new.target) throw 'Room() must be called with new'
+		this.id = id
+		this.players = []
+		this.json = json
+		this.addPlayer = p => this.players.push(p)
+		this.removePlayer = p => this.players = this.players.filter(v => v !== p)
+	}
+
+	world.rooms = world.storage.InitRooms(world.Room)
 	
 	world.Player = function (playerId, nickname) {
 		this.playerId = playerId

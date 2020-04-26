@@ -1,9 +1,7 @@
 const JSONTools = require('./json')
-const Room = require('./room')
 const path = require('path')
 
 const players = []
-const rooms = []
 
 /*****************
  * Players
@@ -13,6 +11,8 @@ function SaveNewPlayer(player) {
 	var index = GetPlayer(player.playerId, true) // true to get index
 	if (index == -1) {
 		players.push(player)
+	} else {
+		console.log(`player is already connected: ${player.nickname}`)
 	}
 }
 
@@ -24,21 +24,25 @@ function GetPlayer(playerId, index = false) {
 /*****************
  * ROOMS
  *****************/
-var folder = path.join(global.appDir, "./rooms/")
+
+var folder = require.main.filename + "/../rooms/"
 console.log("ROOMS:", folder)
 var roomIds = [
 	"tavern"
 ]
 
+var tempRoomList = require(folder + 'rooms')
+/*
 function GetHoliday() {
 	if (new Date().getMonth() == 9) {
 		return "halloween"
 	}
 	return undefined
 }
-
+*/
 async function SaveNewRoom(id) {
 	var name = id
+	/*
 	var holiday = GetHoliday()
 	if (holiday) {
 		var holidayJson = name = name + "-" + holiday
@@ -46,27 +50,25 @@ async function SaveNewRoom(id) {
 			name = holidayJson
 		}
 	}
+	*/
 	var data = await JSONTools.ReadJSON(folder + name + ".json")
 	var room = new Room(id, data)
 	rooms.push(room)
 }
 
 
-function InitRooms() {
-	roomIds.forEach(roomId => {
-		SaveNewRoom(roomId)
-	})
-}
+function InitRooms(Room) {
+	var rooms = {}
+	for (let i of tempRoomList)
+		rooms[i.RoomId] = new Room(i)
 
-function GetRoom(roomId, index = false) {
-	return rooms[index ? 'findIndex' : 'find']
-		(r => r.id === roomId)
+	return rooms
+	//for room list or something
+	//	SaveNewRoom(i)
 }
-
-InitRooms()
 
 module.exports = {
 	SaveNewPlayer,
 	GetPlayer,
-	GetRoom
+	InitRooms,
 }

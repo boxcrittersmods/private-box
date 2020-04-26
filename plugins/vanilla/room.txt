@@ -1,4 +1,3 @@
-/*
 ROOM
 roomId:string
 playerList
@@ -19,13 +18,8 @@ json:
 		sprites:
 			frames: Array(Array(number)[7])
 			images: Array(string)
-*/
 
-module.exports = function (id, json) {
-	if (!new.target) throw 'Room() must be called with new'
-	this.id = id
-	this.players = []
-	this.json = json
-	this.addPlayer = p => this.players.push(p)
-	this.removePlayer = p => this.players = this.players.filter(v => v !== p)
-}
+
+this is probably outdated but there was the comment and it seems important
+
+needs to be sorted out

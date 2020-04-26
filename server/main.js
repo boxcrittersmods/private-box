@@ -1,7 +1,6 @@
 "use strict"
 
 const socketIo = require('socket.io')
-const JSONTools = require('./json')
 
 var world = {
 	listeners: {},
