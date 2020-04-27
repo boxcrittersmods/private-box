@@ -1,9 +1,8 @@
 module.exports = function (world) {
 	return {
 		code: function (session, { code, options }) {
-			console.log(`command: ${code}, ${options} from player: ${session.player.nickname}`)
-			console.log(commands)
-			if (commands[code]) session = commands[code](session, ...options)
+			console.log(`command "${code} ${options}" from player "${session.player.nickname}"`)
+			if (world.commands[code]) session = world.commands[code](session, ...options)
 		},
 
 		login: function (session, { playerId, nickname }) {
