@@ -24,8 +24,8 @@
 		return;
 	}
 
-	if (!window.cardboard)// cardboard fixes world events
-		alert('Cardboard missing, mod compatibility is TERRIBLE with non-cardboard mods');
+	//if (!window.cardboard)// cardboard fixes world events
+	//	alert('Cardboard missing, mod compatibility is TERRIBLE with non-cardboard mods');
 
 	var worldTags = [];
 
