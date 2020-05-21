@@ -6,7 +6,7 @@
 // @description  connect to private-box servers
 // @author       SArpnt
 // @match        https://boxcritters.com/play/*
-// @grant        unsafeWindow
+// @grant        none
 // ==/UserScript==
 
 (function () {
