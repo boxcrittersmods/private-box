@@ -38,8 +38,15 @@
 	scripts.login.function = function (oldtag) {
 		var tag = document.createElement('script');
 		tag.innerHTML = scripts.login.text.replace(
+			/(let|var|)\s+ticket\s*=\s*result\.data\.SessionTicket\s*[\n;]/,
+			`let data = result.data;
+			console.log({data});`
+		).replace(
 			/['"]handleLogin['"]\s*,\s*{\s*detail\s*:\s*ticket\s*}/,
-			`'handleLogin',{detail:(console.log(result),ticket)}`
+			`'handleLogin',{detail:Object.assign({
+				sessionTicket: data.SessionTicket,
+				playerId: data.PlayFabId
+			},${JSON.stringify(url.data)})}`
 		);
 
 		oldtag.replaceWith(tag);
@@ -47,8 +54,12 @@
 	scripts.index.function = function (oldtag) {
 		var tag = document.createElement('script');
 		tag.innerHTML = scripts.index.text.replace(
-			/socketPath\s*=\s*[^\n;\s]*\s*[;\n]/,
-			`socketPath=${JSON.stringify(url.ip)};`
+			/socketURL\s*=\s*[^\n;\s]*\s*[;\n]/,
+			`socketURL = ${JSON.stringify(url.ip)};`
+		).replace(
+			/world\.login\(event\.detail\)\s*[;\n]/,
+			`console.log({detail:event.detail});
+			world.login(event.detail);`
 		);
 
 		oldtag.replaceWith(tag);
