@@ -5,7 +5,8 @@
 // @run-at       document-start
 // @description  connect to private-box servers
 // @author       SArpnt
-// @match        https://boxcritters.com/play/*
+// @match        https://play.boxcritters.com/*
+// @require      https://code.jquery.com/jquery-3.5.1.min.js
 // @grant        none
 // ==/UserScript==
 
@@ -20,52 +21,47 @@
 	if (!url.ip) return; // nothing needs to happen if not connecting to a server
 
 	if (document.head) { // dumdum detector
-		alert('Head already exists - make sure to enable instant script injection');
+		alert('Enable instant script injection in Tampermonkey settings');
 		return;
 	}
+
+	let scripts = {
+		login: { src: '/scripts/login.js', text: null, done: false },
+		index: { src: 'index.js', text: null, done: false },
+	};
+	for (let i in scripts)
+		$.get(scripts[i].src, d => (scripts[i].text = d), 'text');
 
 	//if (!window.cardboard)// cardboard fixes world events
 	//	alert('Cardboard missing, mod compatibility is TERRIBLE with non-cardboard mods');
 
-	var worldTags = [];
+	scripts.login.function = function (oldtag) {
+		var tag = document.createElement('script');
+		tag.innerHTML = scripts.login.text.replace(
+			/['"]handleLogin['"]\s*,\s*{\s*detail\s*:\s*ticket\s*}/,
+			`'handleLogin',{detail:(console.log(result),ticket)}`
+		);
 
+		oldtag.replaceWith(tag);
+	};
+	scripts.index.function = function (oldtag) {
+		var tag = document.createElement('script');
+		tag.innerHTML = scripts.index.text.replace(
+			/socketPath\s*=\s*[^\n;\s]*\s*[;\n]/,
+			`socketPath=${JSON.stringify(url.ip)};`
+		);
+
+		oldtag.replaceWith(tag);
+	};
 	new MutationObserver((m, o) => {
-		function foundWorld(tag) {
-			tag.remove(); // yeet
-			worldTags.push(tag); // save for later
-		}
-		function foundSocketPath(tag) {
-			tag.remove(); // yeet
-
-			tag.innerHTML = tag.innerHTML.replace(/socketPath\s*=\s*'([^']*)'\s*[;\n]/, `socketPath=${JSON.stringify(url.ip)};`);
-			console.log(tag.innerHTML);
-
-			World.prototype.login = function (t) {
-				socket.open();
-				let loginInfo = { playerId: myPlayer.playerId };
-				if (url.data) loginInfo = Object.assign(loginInfo, url.data);
-				socket.emit("login", loginInfo);
-			};
-
-			if (worldTags.length > 0)
-				throw ("world used before world created? mod may be out of date or other broken mods are being used", { tag, worldTags });
-
-			worldTags.push(tag); // save for later
-
-		}
-		for (let r of m) {
-			let e = r.target; // i should probably test if you can use deconstruction in the for loop
-			if (e.tagName == "SCRIPT" && /world/.exec(e.innerHTML) && !worldTags.includes(e.innerHTML))
-				if (/var socketPath/.exec(e.innerHTML))
-					foundSocketPath(e);
-				else
-					foundWorld(e);
-		}
+		for (let i in scripts)
+			if (!scripts[i].done) {
+				let a = document.querySelector(`script[src='${scripts[i].src}']`);
+				if (a) {
+					scripts[i].function(a);
+					scripts[i].done = true;
+					if (Object.values(scripts).every(i => i.done)) o.disconnect();
+				}
+			}
 	}).observe(document.documentElement, { childList: true, subtree: true });
-
-	window.addEventListener('load', function () {
-		for (let script of worldTags) {
-			this.document.body.appendChild(script); // lets a go
-		}
-	});
 })();
