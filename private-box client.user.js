@@ -3,14 +3,14 @@
 // @namespace    http://tampermonkey.net/
 // @version      Alpha 1.1.0
 // @run-at       document-start
-// @description  connect to private-box servers
+// @description  Connect to private-box servers
 // @author       SArpnt
 // @match        https://play.boxcritters.com/*
 // @grant        none
 // @require      https://code.jquery.com/jquery-3.5.1.min.js
-// @require      https://cdn.jsdelivr.net/gh/sarpnt/joinFunction/script.min.js
-// @require      https://cdn.jsdelivr.net/gh/sarpnt/EventHandler/script.min.js
-// @require      https://cdn.jsdelivr.net/gh/boxcritters/cardboard/script.user.min.js
+// @require      https://github.com/sarpnt/joinFunction/raw/master/script.js
+// @require      https://github.com/sarpnt/EventHandler/raw/master/script.js
+// @require      https://github.com/boxcritters/cardboard/raw/master/script.user.js
 // ==/UserScript==
 
 (function () {
@@ -45,5 +45,5 @@
 			`console.log({detail:event.detail});
 			world.login(event.detail);`
 		);
-	};
+	});
 })();
