@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Private-box client
 // @namespace    http://tampermonkey.net/
-// @version      Alpha 1.1.1
+// @version      Alpha 2.0.0
 // @run-at       document-start
 // @description  Connect to private-box servers
 // @author       SArpnt
@@ -23,8 +23,14 @@
 	};
 	if (!url.ip) return; // nothing needs to happen if not connecting to a server
 
-	cardboard.on('loadScriptLogin', function (tag) {
-		tag.innerHTML = tag.innerHTML.replace(
+	cardboard.on('loadScriptClient', function (t) {
+		t.innerHTML = t.innerHTML.replace(
+			/.emit\(\s*['"`]code['"`]\s*,\s*i\s*\)/,
+			`.emit("code", i, ...e)`
+		)
+	});
+	cardboard.on('loadScriptLogin', function (t) {
+		t.innerHTML = t.innerHTML.replace(
 			/(let|var|)\s+ticket\s*=\s*result\.data\.SessionTicket\s*[\n;]/,
 			`let data = result.data;
 			console.log({data});`
@@ -36,8 +42,8 @@
 			},${JSON.stringify(url.data)})}`
 		);
 	});
-	cardboard.on('loadScriptIndex', function (tag) {
-		tag.innerHTML = tag.innerHTML.replace(
+	cardboard.on('loadScriptIndex', function (t) {
+		t.innerHTML = t.innerHTML.replace(
 			/socketURL\s*=\s*[^\n;\s]*\s*[;\n]/,
 			`socketURL = ${JSON.stringify(url.ip)};`
 		).replace(
