@@ -1,6 +1,6 @@
 module.exports = function (world) {
 	return {
-		code: function (session, { code, options }) {
+		code: function (session, code, options) {
 			console.log(`command "${code} ${options}" from player "${session.player.nickname}"`);
 			if (world.commands[code]) session = world.commands[code](session, ...options);
 		},
@@ -10,7 +10,7 @@ module.exports = function (world) {
 				console.log("invalid login!");
 				session.socket.disconnect();
 			}
-			console.log(playerInfo)
+			console.log(playerInfo);
 			if (!playerInfo) { invalid(); return; }
 			let playerId = playerInfo.playerId;
 			if (!playerId) { invalid(); return; }
@@ -31,9 +31,14 @@ module.exports = function (world) {
 				session.socket.to(session.room.id).emit("R", world.crumb.leave(session.player));
 			}
 		},
+
+		joinLobby: function (session) {
+			this.joinRoom(session, "tavern"); // make default room variable
+		},
 		joinRoom: function (session, roomId) {
-			console.log({ session, roomId });
 			if (!session.player) return;
+			if (!world.rooms[roomId]) return;
+			console.log(`${session.player.nickname} joined room ${roomId}`);
 
 			session.room = world.rooms[roomId];//LoadRoom
 			session.room.addPlayer(session.player);
@@ -54,7 +59,7 @@ module.exports = function (world) {
 		}
 		*/
 
-		click: function (session, { x, y }) {
+		moveTo: function (session, x, y) {
 			if (!session.room) return;
 			if (!session.player) return;
 			console.log("click", x, y);
@@ -64,12 +69,19 @@ module.exports = function (world) {
 			session.socket.to(session.room.id).emit("X", world.crumb.move(session.player));
 			session.socket.emit("X", world.crumb.move(session.player)); // might not be neccecary
 		},
-		sendMessage: function (session, { message }) {
+		message: function (session, message) {
 			if (!session.room) return;
 			if (!session.player) return;
-			console.log("sendMessage", message);
+			console.log("message", message);
 			session.socket.to(session.room.id).emit("M", world.crumb.message(session.player, message));
 			session.socket.emit("M", world.crumb.message(session.player, message)); // might not be neccecary
+		},
+		emote: function (session, emote) {
+			if (!session.room) return;
+			if (!session.player) return;
+			console.log("emote", emote);
+			session.socket.to(session.room.id).emit("E", world.crumb.message(session.player, emote));
+			session.socket.emit("E", world.crumb.message(session.player, emote)); // might not be neccecary
 		},
 	};
 }

@@ -22,16 +22,16 @@ module.exports = new class {
 
 	room(room) {
 		return {
-			RoomId: room.id,
-			Name: room.json.name,
-			PlayerCrumbs: room.players.map(p => this.player(p)),
-			Height: room.json.height,
-			Width: room.json.width,
-			margin: room.json.margin,
-			minDistance: room.json.minDistance,
-			artwork: room.json.artwork,
-			tileMap: room.json.tileMap,
-			tileSize: room.json.tileSize
+			roomId: room.id,
+			//Name: room.json.name,
+			playerCrumbs: room.players.map(p => this.player(p)),
+			//Height: room.json.height,
+			//Width: room.json.width,
+			//margin: room.json.margin,
+			//minDistance: room.json.minDistance,
+			//artwork: room.json.artwork,
+			//tileMap: room.json.tileMap,
+			//tileSize: room.json.tileSize
 		}
 	}
 

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Private-box client
 // @namespace    http://tampermonkey.net/
-// @version      Alpha 1.1.0
+// @version      Alpha 1.1.1
 // @run-at       document-start
 // @description  Connect to private-box servers
 // @author       SArpnt
@@ -29,7 +29,7 @@
 			`let data = result.data;
 			console.log({data});`
 		).replace(
-			/['"]handleLogin['"]\s*,\s*{\s*detail\s*:\s*ticket\s*}/,
+			/['"`]handleLogin['"`]\s*,\s*{\s*['"]?detail['"]?\s*:\s*ticket\s*}/,
 			`'handleLogin',{detail:Object.assign({
 				sessionTicket: data.SessionTicket,
 				playerId: data.PlayFabId

@@ -28,7 +28,10 @@ function GetPlayer(playerId, index = false) {
 var folder = require.main.filename + "/../rooms/"
 console.log("ROOMS:", folder)
 var roomIds = [
-	"tavern"
+	"crash_site",
+	"cellar",
+	"tavern",
+	"port",
 ]
 
 var tempRoomList = require(folder + 'rooms')
