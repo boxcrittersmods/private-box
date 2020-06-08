@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Private-box client
 // @namespace    http://tampermonkey.net/
-// @version      Alpha 2.0.0
+// @version      Alpha 2.0.1
 // @run-at       document-start
 // @description  Connect to private-box servers
 // @author       SArpnt
@@ -10,7 +10,7 @@
 // @require      https://code.jquery.com/jquery-3.5.1.min.js
 // @require      https://github.com/sarpnt/joinFunction/raw/master/script.js
 // @require      https://github.com/sarpnt/EventHandler/raw/master/script.js
-// @require      https://github.com/boxcritters/cardboard/raw/master/script.user.js
+// @require      https://github.com/SArpnt/cardboard/raw/master/script.user.js
 // ==/UserScript==
 
 (function () {
