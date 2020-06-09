@@ -2,7 +2,7 @@ const JSONTools = require('./json');
 const fs = require('fs')
 const path = require('path');
 
-const DATA_FOLDER = require.main.filename + "/../data/";
+const DATA_FOLDER = path.normalize(require.main.filename + "/../data/");
 console.log("DATA:", DATA_FOLDER);
 var data = {
 	rooms: undefined,
