@@ -27,8 +27,7 @@ module.exports = function (world) {
 		disconnect: function (session, reason) {
 			console.log(`client disconnected: ${reason}`);
 			if (session.room) {
-				session.room.removePlayer(session.player);
-				session.socket.to(session.room.id).emit("R", world.crumb.leave(session.player));
+				session.room.removePlayer(session);
 			}
 		},
 
@@ -40,10 +39,12 @@ module.exports = function (world) {
 			if (!world.rooms[roomId]) return;
 			console.log(`${session.player.nickname} joined room ${roomId}`);
 
+			if (session.room) session.room.removePlayer(session);
+
 			session.room = world.rooms[roomId];//LoadRoom
-			session.room.addPlayer(session.player);
-			session.socket.to(roomId).emit("A", world.crumb.player(session.player));//inform other players of join
 			session.socket.join(roomId);
+			session.room.addPlayer(session);
+
 			console.log(session.room, world.crumb.room(session.room));//send room
 			session.socket.emit('joinRoom', world.crumb.room(session.room));
 		},

@@ -10,12 +10,18 @@ module.exports = function (world) {
 		this.id = id;
 		this.players = [];
 		this.json = json;
-		this.addPlayer = p => this.players.push(p);
-		this.removePlayer = p => this.players = this.players.filter(v => v !== p);
+		this.addPlayer = session => (
+			session.socket.to(this.id).emit("A", world.crumb.player(session.player)),
+			this.players.push(session.player)
+		);
+		this.removePlayer = session => (
+			session.socket.to(this.id).emit("R", world.crumb.leave(session.player)),
+			this.players = this.players.filter(v => v !== session.player)
+		);
 	};
 
 	world.rooms = {};
-	console.log(world.data)
+	console.log(world.data);
 	for (let i of world.data.rooms)
 		world.rooms[i.roomId] = new world.Room(i);
 
