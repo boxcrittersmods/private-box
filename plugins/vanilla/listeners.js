@@ -32,7 +32,7 @@ module.exports = function (world) {
 		},
 
 		joinLobby: function (session) {
-			this.joinRoom(session, "tavern"); // make default room variable
+			this.joinRoom(session, "port"); // make default room variable
 		},
 		joinRoom: function (session, roomId) {
 			if (!session.player) return;

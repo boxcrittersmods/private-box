@@ -9,15 +9,22 @@ module.exports = function (world) {
 		if (!new.target) throw 'Room() must be called with new';
 		this.id = id;
 		this.players = [];
+		this.start = {
+			x: json.startX,
+			y: json.startY,
+			r: json.startR,
+		};
 		this.json = json;
-		this.addPlayer = session => (
-			session.socket.to(this.id).emit("A", world.crumb.player(session.player)),
-			this.players.push(session.player)
-		);
-		this.removePlayer = session => (
-			session.socket.to(this.id).emit("R", world.crumb.leave(session.player)),
-			this.players = this.players.filter(v => v !== session.player)
-		);
+		this.addPlayer = session => {
+			session.socket.to(this.id).emit("A", world.crumb.player(session.player));
+			for (let i in this.start)
+				session.player[i] = this.start[i];
+			this.players.push(session.player);
+		};
+		this.removePlayer = session => {
+			session.socket.to(this.id).emit("R", world.crumb.leave(session.player));
+			this.players = this.players.filter(v => v !== session.player);
+		};
 	};
 
 	world.rooms = {};
