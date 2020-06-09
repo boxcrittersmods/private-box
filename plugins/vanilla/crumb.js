@@ -2,11 +2,21 @@ module.exports = new class {
 
 	login(player) {
 		return {
-			playerId: player.playerId,
+			coins: 0,
 			critterId: player.critterId,
+			eggs: [],
+			gear: [],
+			inventory: player.inventory,
+			isMember: true,
 			nickname: player.nickname,
-			inventory: player.inventory
-		}
+			playerId: player.playerId,
+
+			_pb_: {
+				manifest: [
+					
+				]
+			},
+		};
 	}
 
 	player(player) {
@@ -17,14 +27,15 @@ module.exports = new class {
 			x: player.x,
 			y: player.y,
 			r: player.r
-		}
+		};
 	}
 
 	room(room) {
 		return {
 			roomId: room.id,
-			//Name: room.json.name,
 			playerCrumbs: room.players.map(p => this.player(p)),
+
+			//Name: room.json.name,
 			//Height: room.json.height,
 			//Width: room.json.width,
 			//margin: room.json.margin,
@@ -32,7 +43,7 @@ module.exports = new class {
 			//artwork: room.json.artwork,
 			//tileMap: room.json.tileMap,
 			//tileSize: room.json.tileSize
-		}
+		};
 	}
 
 	move(player) {
@@ -41,20 +52,20 @@ module.exports = new class {
 			x: player.x,
 			y: player.y,
 			//r: player.r // not used because it's unneccecary and rotation acutally breaks
-		}
+		};
 	}
 
 	message(player, message) {
 		return {
 			i: player.playerId,
 			m: message
-		}
+		};
 	}
 
 	leave(player) {
 		return {
 			i: player.playerId
-		}
+		};
 	}
 
 }

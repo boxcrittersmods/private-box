@@ -1,17 +1,17 @@
-"use strict"
+"use strict";
 
-var port = process.env.PORT || 3000
+var port = process.env.PORT || 3000;
 
-var http = require('http')
-const path = require('path')
-var express = require('express')
-var app = express()
-var server = http.Server(app)
-app.set('port', port)
+var http = require('http');
+const path = require('path');
+var express = require('express');
+var app = express();
+var server = http.Server(app);
+app.set('port', port);
 
 server.listen(port, function () {
-	console.log(`Starting server on port: ${port}, directory: ${__dirname}`)
-})
+	console.log(`Starting server on port: ${port}, directory: ${__dirname}`);
+});
 
-var {main,world} = require('./server/main')
-main(server)
+var { main, world } = require('./server/main');
+main(server);

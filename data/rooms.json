@@ -1,0 +1,177 @@
+[
+	{
+		"roomId": "cellar",
+		"width": 855,
+		"height": 480,
+		"startX": 100,
+		"startY": 360,
+		"startR": 180,
+		"triggers": [
+			{
+				"hex": "ff0000",
+				"world": {
+					"joinRoom": "tavern"
+				}
+			},
+			{
+				"hex": "7f0000",
+				"world": {
+					"joinRoom": "crash_site"
+				}
+			}
+		],
+		"background": "/media/rooms/cellar/0df5126f0fe5967d4c5a5175a9e6d907/background.png",
+		"foreground": "/media/rooms/cellar/0df5126f0fe5967d4c5a5175a9e6d907/foreground.png",
+		"treasure": "/media/rooms/cellar/0df5126f0fe5967d4c5a5175a9e6d907/treasure.png",
+		"navMesh": "/media/rooms/cellar/0df5126f0fe5967d4c5a5175a9e6d907/nav_mesh.png",
+		"spriteSheet": "/media/rooms/cellar/0df5126f0fe5967d4c5a5175a9e6d907/sprites.json",
+		"layout": "/media/rooms/cellar/0df5126f0fe5967d4c5a5175a9e6d907/layout.json"
+	},
+	{
+		"roomId": "crash_site",
+		"width": 2000,
+		"height": 480,
+		"startX": 1850,
+		"startY": 250,
+		"startR": 180,
+		"triggers": [
+			{
+				"hex": "00cc00",
+				"room": {
+					"hide": [
+						"ship_wall"
+					]
+				}
+			},
+			{
+				"hex": "ff00ff",
+				"room": {
+					"name": "explosion"
+				}
+			},
+			{
+				"hex": "00ffff",
+				"world": {
+					"joinRoom": "cellar"
+				}
+			},
+			{
+				"hex": "00ccff",
+				"server": {
+					"grantItem": "bb_huggable"
+				}
+			},
+			{
+				"hex": "0099ff",
+				"server": {
+					"grantItem": "bb_beebee"
+				}
+			},
+			{
+				"hex": "f592e2",
+				"server": {
+					"grantItem": "bb_will"
+				}
+			},
+			{
+				"hex": "6633cc",
+				"server": {
+					"grantItem": "bb_astoria"
+				}
+			},
+			{
+				"hex": "ffcc00",
+				"server": {
+					"grantItem": "bb_oliver"
+				}
+			},
+			{
+				"hex": "66cc99",
+				"server": {
+					"grantItem": "bb_riggs"
+				}
+			},
+			{
+				"hex": "66ff00",
+				"server": {
+					"grantItem": "bb_tillman"
+				}
+			}
+		],
+		"background": "/media/rooms/crash_site/78bc12fd655391dc703e9d0b7b392f6d/background.png",
+		"foreground": "/media/rooms/crash_site/78bc12fd655391dc703e9d0b7b392f6d/foreground.png",
+		"treasure": "/media/rooms/crash_site/78bc12fd655391dc703e9d0b7b392f6d/treasure.png",
+		"navMesh": "/media/rooms/crash_site/78bc12fd655391dc703e9d0b7b392f6d/nav_mesh.png",
+		"spriteSheet": "/media/rooms/crash_site/78bc12fd655391dc703e9d0b7b392f6d/sprites.json",
+		"layout": "/media/rooms/crash_site/78bc12fd655391dc703e9d0b7b392f6d/layout.json"
+	},
+	{
+		"roomId": "port",
+		"isLobby": true,
+		"width": 2400,
+		"height": 480,
+		"startX": 1290,
+		"startY": 315,
+		"startR": 180,
+		"triggers": [
+			{
+				"hex": "990000",
+				"world": {
+					"joinRoom": "tavern"
+				}
+			},
+			{
+				"hex": "ffff00",
+				"server": {
+					"grantItem": "grad_robe"
+				}
+			},
+			{
+				"hex": "ffcc00",
+				"server": {
+					"grantItem": "grad_hat"
+				}
+			},
+			{
+				"hex": "00ffff",
+				"server2": {
+					"joinGame": "card_proxy"
+				}
+			}
+		],
+		"background": "/media/rooms/port/50a27ac8cc903c757a1ff4c7d35100d7/background.png",
+		"foreground": "/media/rooms/port/50a27ac8cc903c757a1ff4c7d35100d7/foreground.png",
+		"treasure": "/media/rooms/port/50a27ac8cc903c757a1ff4c7d35100d7/treasure.png",
+		"navMesh": "/media/rooms/port/50a27ac8cc903c757a1ff4c7d35100d7/nav_mesh.png",
+		"spriteSheet": "/media/rooms/port/50a27ac8cc903c757a1ff4c7d35100d7/sprites.json",
+		"layout": "/media/rooms/port/50a27ac8cc903c757a1ff4c7d35100d7/layout.json"
+	},
+	{
+		"roomId": "tavern",
+		"width": 855,
+		"height": 480,
+		"startX": 440,
+		"startY": 225,
+		"startR": 180,
+		"triggers": [
+			{
+				"hex": "ff0000",
+				"world": {
+					"joinRoom": "cellar"
+				}
+			},
+			{
+				"hex": "00ff00",
+				"world": {
+					"joinRoom": "port"
+				}
+			}
+		],
+		"background": "/media/rooms/tavern/f9df2f5e2e3b8ffe8a5ffb88d89740e4/background.png",
+		"foreground": "/media/rooms/tavern/f9df2f5e2e3b8ffe8a5ffb88d89740e4/foreground.png",
+		"treasure": "/media/rooms/tavern/f9df2f5e2e3b8ffe8a5ffb88d89740e4/treasure.png",
+		"navMesh": "/media/rooms/tavern/f9df2f5e2e3b8ffe8a5ffb88d89740e4/nav_mesh.png",
+		"spriteSheet": "/media/rooms/tavern/f9df2f5e2e3b8ffe8a5ffb88d89740e4/sprites.json",
+		"layout": "/media/rooms/tavern/f9df2f5e2e3b8ffe8a5ffb88d89740e4/layout.json"
+	}
+]

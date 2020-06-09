@@ -23,7 +23,6 @@ function ReadJSON(file) {
 		} catch (err) {
 			reject(err)
 		}
-
 	})
 }
 
