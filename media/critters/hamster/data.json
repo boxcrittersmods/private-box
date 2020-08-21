@@ -1,0 +1,14 @@
+{
+	"critterId": "hamster",
+	"name": "Hamster",
+	"type": "critter",
+	"regX": 68,
+	"regY": 140,
+	"body": "https://media.boxcritters.com/critters/hamster/body.png",
+	"face": "https://media.boxcritters.com/critters/hamster/face.png",
+	"nose": "https://media.boxcritters.com/critters/hamster/nose.png",
+	"ears": "https://media.boxcritters.com/critters/hamster/ears.png",
+	"hasEars": true,
+	"feet": "https://media.boxcritters.com/critters/hamster/feet.png",
+	"spriteSheet": "https://media.boxcritters.com/critters/hamster/sprites.json"
+}

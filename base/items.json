@@ -1,0 +1,16 @@
+[
+	{
+		"itemId": "testitem",
+		"name": "Test Item",
+		"cost": 0,
+		"slot": "head",
+		"theme": "test",
+		"hideEars": null,
+		"hideNose": null,
+		"icon": "https://media.boxcritters.com/items/viking/icon.png",
+		"bits": {
+			"front": "https://media.boxcritters.com/items/viking/front.png"
+		},
+		"sprites": "https://media.boxcritters.com/items/viking/sprites.png"
+	}
+]

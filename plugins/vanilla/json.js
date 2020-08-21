@@ -1,10 +1,12 @@
-const fs = require('fs')
+"use strict";
+
+const fs = require('fs');
 
 function JSONExists(file) {
 	try {
-		return fs.existsSync(file)
+		return fs.existsSync(file);
 	} catch (err) {
-		return false
+		return false;
 	}
 }
 
@@ -14,19 +16,19 @@ function ReadJSON(file) {
 			if (fs.existsSync(file)) {
 				fs.readFile(require.resolve(file), (err, data) => {
 					if (err) {
-						reject(err)
+						reject(err);
 					} else {
-						resolve(JSON.parse(data))
+						resolve(JSON.parse(data));
 					}
-				})
+				});
 			}
 		} catch (err) {
-			reject(err)
+			reject(err);
 		}
-	})
+	});
 }
 
 module.exports = {
 	ReadJSON,
 	JSONExists
-}
+};

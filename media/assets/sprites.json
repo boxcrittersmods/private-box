@@ -1,0 +1,20 @@
+{
+	"images": [
+		"https://media.boxcritters.com/assets/sprites.png"
+	],
+	"framerate": 20,
+	"frames": [
+		[1, 1, 168, 168, 0, 0, 0],
+		[171, 1, 168, 168, 0, 0, 0],
+		[341, 1, 80, 80, 0, 0, 0]
+	],
+	"animations": {
+		"item": { "frames": [0] },
+		"item_active": { "frames": [1] },
+		"close": { "frames": [2] }
+	},
+	"texturepacker": [
+		"SmartUpdateHash: $TexturePacker:SmartUpdate:2c1c80302c923dff6774d712fe8eaf59:579ffd37c409b8b7e774372d24cb2b72:d7ad662e075e031ebe5eabb6749e680c$",
+		"Created with TexturePacker (https://www.codeandweb.com/texturepacker) for EaselJS"
+	]
+}

@@ -1,0 +1,20 @@
+[
+	{
+		"roomId": "testroom",
+		"name": "Test_room",
+		"width": 855,
+		"height": 480,
+		"startX": 440,
+		"startY": 225,
+		"startR": 180,
+		"background": "::ip::/media/rooms/testroom/background.png",
+		"foreground": "::ip::/media/rooms/testroom/foreground.png",
+		"treasure": "::ip::/media/rooms/testroom/treasure.png",
+		"navMesh": "::ip::/media/rooms/testroom/navmesh.png",
+		"music": "https://media.boxcritters.com/rooms/tavern/4ed410b494748b5b0d1ff8878bcc0999/music.mp3",
+		"layout": "::ip::/media/rooms/testroom/layout.json",
+		"triggers": [],
+		"spriteSheet": "::ip::/media/rooms/testroom/sprites.json",
+		"extra": null
+	}
+]

@@ -1,6 +1,9 @@
+"use strict";
+
 module.exports = function (world) {
 	return {
-		code: function (session, code, ...options) {
+		code: function (session, code, options) {
+			options = options.split(' ');
 			console.log(`command "${code + (options[0] ? " " + options.join(' ') : "")}" from player "${session.player.nickname}"`);
 			if (world.commands[code]) session = world.commands[code](session, ...options);
 		},
@@ -32,7 +35,7 @@ module.exports = function (world) {
 		},
 
 		joinLobby: function (session) {
-			this.joinRoom(session, "port"); // make default room variable
+			this.joinRoom(session, "testroom"); // make default room variable
 		},
 		joinRoom: function (session, roomId) {
 			if (!session.player) return;
@@ -85,4 +88,4 @@ module.exports = function (world) {
 			session.socket.emit("E", world.crumb.message(session.player, emote)); // might not be neccecary
 		},
 	};
-}
+};

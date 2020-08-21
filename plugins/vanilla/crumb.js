@@ -1,3 +1,5 @@
+"use strict";
+
 module.exports = new class {
 
 	login(player) {
@@ -13,7 +15,7 @@ module.exports = new class {
 
 			_pb_: {
 				manifest: [
-					
+
 				]
 			},
 		};

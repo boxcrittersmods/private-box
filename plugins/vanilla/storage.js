@@ -1,8 +1,10 @@
+"use strict";
+
 const JSONTools = require('./json');
-const fs = require('fs')
+const fs = require('fs');
 const path = require('path');
 
-const DATA_FOLDER = path.normalize(require.main.filename + "/../data/");
+const DATA_FOLDER = path.normalize(require.main.filename + "/../base/");
 console.log("DATA:", DATA_FOLDER);
 var data = {
 	rooms: undefined,

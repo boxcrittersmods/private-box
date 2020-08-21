@@ -14,7 +14,7 @@ var world = {
 		this.socket.emit("connect");
 	},
 	//Player
-	// Room: require('./room'),
+	//Room: require('./room'),
 	//Crumb: require('./crumb'),
 	//Storage: require('./storage') // work on this file
 };
