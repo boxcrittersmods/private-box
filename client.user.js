@@ -25,10 +25,13 @@
 	const urlParams = new URLSearchParams(window.location.search);
 	let url = {
 		ip: urlParams.get("ip"),
-		data: JSON.parse(urlParams.get("sendData")),
+		sendData: JSON.parse(urlParams.get("sendData")),
 	};
 	if (!url.ip) return; // nothing needs to happen if not connecting to a server
-	modData = url;
+	for (let i in url)
+		modData[i] = url[i];
+
+	modData.urlParse = u => u.replace('::ip::', url.ip);
 
 	cardboard.on('loadScriptCreatejs', function (t) {
 		t.innerHTML = t.innerHTML.replace(
@@ -37,6 +40,9 @@
 		).replace(
 			/i\s*=\s*b\s*\+\s*i,/,
 			``
+		).replace(
+			/f\s*=\s*document\.createElement\s*\(\s*['"`]img['"`]\s*\)\s*,\s*f\.src\s*=\s*g/,
+			`f = document.createElement("img" ), f.src = cardboard.mods.privateBox.urlParse(g)`
 		);
 	});
 	cardboard.on('runScriptCreatejs', function (t) {
@@ -44,10 +50,7 @@
 		createjs.LoadItem.create = function (u) {
 			let li = o.call(this, u);
 			li.ourl = li.src;
-			li.src = li.src.replace(
-				'::ip::',
-				url.ip
-			);
+			li.src = modData.urlParse(li.src);
 			return li;
 		};
 	});
@@ -72,7 +75,6 @@
 								return url.ip;
 						}
 					);
-				console.log(preload);
 				return `world.preload(${JSON.stringify(preload)})`;
 			}
 		).replace(
@@ -85,7 +87,7 @@
 						playerId: sessionStorage.getItem('playerId'),
 						//sessionTicket: sessionStorage.getItem('sessionTicket'),
 					},
-					${JSON.stringify(url.data)}
+					${JSON.stringify(url.sendData)}
 				)
 			);`
 		).replace(
