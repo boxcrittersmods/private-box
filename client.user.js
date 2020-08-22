@@ -2,7 +2,7 @@
 // @name         Private-box
 // @description  Connect to private-box / other boxcritters servers
 // @author       SArpnt
-// @version      Alpha 3.1.0
+// @version      Alpha 3.2.0
 // @namespace    https://boxcrittersmods.ga/authors/sarpnt/
 // @homepage     https://boxcrittersmods.ga/projects/private-box/
 // @updateURL    https://github.com/boxcrittersmods/private-box/raw/master/client.user.js
@@ -25,9 +25,13 @@
 	const urlParams = new URLSearchParams(window.location.search);
 	let url = {
 		ip: urlParams.get("ip"),
-		sendData: JSON.parse(urlParams.get("sendData")),
 	};
 	if (!url.ip) return; // nothing needs to happen if not connecting to a server
+	try {
+		url.sendData = JSON5.parse(urlParams.get("sendData"));
+	} catch (e) {
+		url.sendData = e;
+	}
 	for (let i in url)
 		modData[i] = url[i];
 
