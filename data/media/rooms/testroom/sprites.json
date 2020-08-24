@@ -1,6 +1,6 @@
 {
 	"images": [
-		"::ip::/media/rooms/testroom/sprites-0.png"
+		"::ip::/data/media/rooms/testroom/sprites-0.png"
 	],
 	"framerate": 20,
 	"frames": [

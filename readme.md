@@ -1,3 +1,7 @@
+# Private Box
+A tool for creating your own worlds using the box critters engine.
+
+## instructions from after rework (not well formatted)
 requires https
 either setup https on your server or host somewhere else like heroku
 
@@ -8,9 +12,6 @@ run with node.js
 
 on client script, set ip and nickname to your liking
 run client connect script in console on boxcritters
-
-# Private Box
-A tool for creatimng your own worlds using the box critters engine.
 
 <!--![screenshot](https://cdn.discordapp.com/attachments/567030108003631108/648901762748776448/private_box.png)-->
 
@@ -46,14 +47,14 @@ to start the client.
 Then go to https://localhost:4000 and see the magick!</s>
 
 ## Built With
-* <s>EaselJS (CreateJS)</s>
-* <s>Jekyll</s>
+* ~~EaselJS (CreateJS)~~
+* ~~Jekyll~~
 * Node.js
 * Express.js
 * Socket.IO
 
 ## Versioning
-We use _Box Critters versioning_ (client- 1, 23, 5678, etc.) :stuck_out_tongue:.
+~~We use _Box Critters versioning_ (client- 1, 23, 5678, etc.) :stuck_out_tongue:.~~
 
 ## Contributors
 * [SArpnt](https://github.com/sarpnt)

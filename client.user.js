@@ -2,7 +2,7 @@
 // @name         Private-box
 // @description  Connect to private-box / other boxcritters servers
 // @author       SArpnt
-// @version      Alpha 3.2.0
+// @version      Alpha 3.2.1
 // @namespace    https://boxcrittersmods.ga/authors/sarpnt/
 // @homepage     https://boxcrittersmods.ga/projects/private-box/
 // @updateURL    https://github.com/boxcrittersmods/private-box/raw/master/client.user.js
@@ -69,16 +69,25 @@
 			/world\.preload\s*\(([^)]*)\)/,
 			(_, p) => {
 				let preload = JSON5.parse(p);
-				for (let a of preload)
-					a.src = a.src.replace(
-						/^https?:\/\/([^/]*)/,
-						(_, domain) => {
-							if (domain == 'media.boxcritters.com')
-								return url.ip + '/media';
-							else
-								return url.ip;
-						}
-					);
+				function editPreload(p) {
+					if (/^https?:\/\/([^/]*)/.test(p.src))
+						p.src = p.src.replace(
+							/^https?:\/\/([^/]*)/,
+							(_, domain) => {
+								if (domain == 'media.boxcritters.com')
+									return url.ip + '/data/media';
+								else
+									return url.ip + '/data';
+							}
+						);
+					else
+						p.src = url.ip + '/data/' + p.src;
+				}
+				if (Array.isArray(preload))
+					for (let p of preload)
+						editPreload(p);
+				else
+					editPreload(preload);
 				return `world.preload(${JSON.stringify(preload)})`;
 			}
 		).replace(
