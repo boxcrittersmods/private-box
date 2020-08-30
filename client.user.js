@@ -10,8 +10,12 @@
 // @supportURL   https://github.com/boxcrittersmods/private-box/issues
 // @run-at       document-start
 // @grant        none
+// @match        https://boxcritters.com/play/
 // @match        https://boxcritters.com/play/?*
+// @match        https://boxcritters.com/play/#*
+// @match        https://boxcritters.com/play/index.html
 // @match        https://boxcritters.com/play/index.html?*
+// @match        https://boxcritters.com/play/index.html#*
 // @require      https://github.com/SArpnt/joinFunction/raw/master/script.js
 // @require      https://github.com/SArpnt/EventHandler/raw/master/script.js
 // @require      https://github.com/SArpnt/cardboard/raw/master/script.user.js
@@ -22,12 +26,16 @@
 	'use strict';
 	let modData = cardboard.register('privateBox');
 
-	let search = sessionStorage.getItem('privateBox');
-	if (search)
-		sessionStorage.removeItem('privateBox');
-	else
-		search = window.location.search;
-	const urlParams = new URLSearchParams(search);
+	if (!window.location.search) {
+		let search = sessionStorage.getItem('privateBox');
+		if (search) {
+			sessionStorage.removeItem('privateBox');
+			window.location.search = search;
+		}
+		return;
+	}
+
+	const urlParams = new URLSearchParams(window.location.search);
 	let url = {
 		ip: urlParams.get("ip"),
 	};
