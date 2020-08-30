@@ -2,7 +2,7 @@
 // @name         Private-box
 // @description  Connect to private-box / other boxcritters servers
 // @author       SArpnt
-// @version      Alpha 3.2.1
+// @version      Alpha 3.2.2
 // @namespace    https://boxcrittersmods.ga/authors/sarpnt/
 // @homepage     https://boxcrittersmods.ga/projects/private-box/
 // @updateURL    https://github.com/boxcrittersmods/private-box/raw/master/client.user.js
@@ -22,7 +22,12 @@
 	'use strict';
 	let modData = cardboard.register('privateBox');
 
-	const urlParams = new URLSearchParams(window.location.search);
+	let search = sessionStorage.getItem('privateBox');
+	if (search)
+		sessionStorage.removeItem('privateBox');
+	else
+		search = window.location.search;
+	const urlParams = new URLSearchParams(search);
 	let url = {
 		ip: urlParams.get("ip"),
 	};
@@ -106,6 +111,10 @@
 		).replace(
 			/world\.joinRoom\s*\(\s*['"`]port['"`]\s*\)/,
 			`world.joinLobby()`
+		).replace(
+			/window\.location\.href\s*=\s*['"`]\.\.\/index\.html['"`][;\n]/,
+			`window.location.href = "../index.html";
+			sessionStorage.setItem('privateBox', window.location.search);`
 		);
 	});
 })();
