@@ -2,7 +2,7 @@
 // @name         Private-box
 // @description  Connect to private-box / other boxcritters servers
 // @author       SArpnt
-// @version      Alpha 3.2.2
+// @version      Alpha 3.2.3
 // @namespace    https://boxcrittersmods.ga/authors/sarpnt/
 // @homepage     https://boxcrittersmods.ga/projects/private-box/
 // @updateURL    https://github.com/boxcrittersmods/private-box/raw/master/client.user.js
@@ -75,7 +75,24 @@
 		t.innerHTML = t.innerHTML.replace(
 			/this\.code\s*\(\s*['"`]code['"`]\s*,\s*i\s*\)/,
 			`this\.code("code", i, ...e)`
+		).replace(
+			/new\s*createjs\.LoadQueue\((?:([^\),]*),?)*\)/g,
+			(...a) => {
+				let x = a.slice(1, a.length - 2);
+				return `new createjs.LoadQueue(${x[0]},${x[1]},true)`;
+			}
 		);
+	});
+	cardboard.on('runScriptClient', function () {
+		convertToImgElement = function (t) {
+			if ("string" == typeof t) {
+				var e = document.createElement("img");
+				return e.crossOrigin = "Anonymous",
+					e.src = modData.urlParse(t),
+					e;
+			}
+			return t;
+		};
 	});
 	cardboard.on('loadScriptIndex', function (t) {
 		t.innerHTML = t.innerHTML.replace(
