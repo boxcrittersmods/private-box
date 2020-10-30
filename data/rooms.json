@@ -4,17 +4,62 @@
 		"name": "Test_room",
 		"width": 855,
 		"height": 480,
+		"start": {
+			"x": 440,
+			"y": 225,
+			"z": 0,
+			"r": 180
+		},
 		"startX": 440,
 		"startY": 225,
+		"startZ": 0,
 		"startR": 180,
-		"background": "::ip::/data/media/rooms/testroom/background.png",
-		"foreground": "::ip::/data/media/rooms/testroom/foreground.png",
-		"treasure": "::ip::/data/media/rooms/testroom/treasure.png",
-		"navMesh": "::ip::/data/media/rooms/testroom/navmesh.png",
-		"music": "https://media.boxcritters.com/rooms/tavern/4ed410b494748b5b0d1ff8878bcc0999/music.mp3",
-		"layout": "::ip::/data/media/rooms/testroom/layout.json",
+		"media": {
+			"background": "::ip::/data/media/rooms/testroom/background.png",
+			"foreground": "::ip::/data/media/rooms/testroom/foreground.png",
+			"treasure": "::ip::/data/media/rooms/testroom/treasure.png",
+			"navMesh": "::ip::/data/media/rooms/testroom/navmesh.png",
+			"music": "https://media.boxcritters.com/rooms/tavern/4ed410b494748b5b0d1ff8878bcc0999/music.mp3"
+		},
+		"layout": {
+			"playground": [
+				{
+					"id": "testSprite",
+					"name": "",
+					"w": 234,
+					"h": 129,
+					"x": 514,
+					"y": 388,
+					"regX": 0,
+					"regY": 0,
+					"isWall": true
+				}
+			]
+		},
 		"triggers": [],
-		"spriteSheet": "::ip::/data/media/rooms/testroom/sprites.json",
-		"extra": null
+		"spriteSheet": {
+			"images": [
+				"::ip::/data/media/rooms/testroom/sprites-0.png"
+			],
+			"framerate": 20,
+			"frames": [
+				[
+					0,
+					0,
+					234,
+					129,
+					0,
+					0,
+					129
+				]
+			],
+			"animations": {
+				"testSprite": {
+					"frames": [
+						0
+					]
+				}
+			}
+		}
 	}
 ]

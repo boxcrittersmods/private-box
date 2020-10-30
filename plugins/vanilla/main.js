@@ -37,8 +37,8 @@ module.exports = function (world) {
 		this.critterId = "hamster";
 		this.nickname = nickname || "NoName";
 		this.inventory = [];
-		this.x = 433;
-		this.y = 195;
+		this.x = 0;
+		this.y = 0;
 		this.r = 0;
 		this.speed = 5;
 	};

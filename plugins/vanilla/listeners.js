@@ -44,11 +44,14 @@ module.exports = function (world) {
 
 			if (session.room) session.room.removePlayer(session);
 
-			session.room = world.rooms[roomId];//LoadRoom
+			session.room = world.rooms[roomId]; // LoadRoom
 			session.socket.join(roomId);
 			session.room.addPlayer(session);
 
-			console.log(session.room, world.crumb.room(session.room));//send room
+			for (let i in session.room.start)
+				session.player[i] = session.room.start[i];
+
+			console.log(session.room, world.crumb.room(session.room)); // send room
 			session.socket.emit('joinRoom', world.crumb.room(session.room));
 		},
 
