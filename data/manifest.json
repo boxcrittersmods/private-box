@@ -13,23 +13,23 @@
 	},
 	{
 		"id": "critters",
-		"src": "../media/v3/critters/hamster/data.json"
+		"src": "https://boxcritters.com/data/critter.json?critterId=hamster"
 	},
 	{
 		"id": "critters",
-		"src": "../media/v3/critters/penguin/data.json"
+		"src": "https://boxcritters.com/data/critter.json?critterId=penguin"
 	},
 	{
 		"id": "critters",
-		"src": "../media/v3/critters/beaver/data.json"
+		"src": "https://boxcritters.com/data/critter.json?critterId=beaver"
 	},
 	{
 		"id": "critters",
-		"src": "../media/v3/critters/lizard/data.json"
+		"src": "https://boxcritters.com/data/critter.json?critterId=lizard"
 	},
 	{
 		"id": "critters",
-		"src": "../media/v3/critters/snail/data.json"
+		"src": "https://boxcritters.com/data/critter.json?critterId=snail"
 	},
 	{
 		"id": "emotes",
