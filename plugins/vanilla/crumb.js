@@ -1,73 +1,51 @@
 "use strict";
-
-module.exports = new class {
-
-	login(player) {
+module.exports = {
+	login: function (player) {
 		return {
-			coins: 0,
+			coins: player.coins,
 			critterId: player.critterId,
-			eggs: [],
-			gear: [],
+			eggs: player.eggs,
+			gear: player.gear,
 			inventory: player.inventory,
 			isMember: true,
 			nickname: player.nickname,
 			playerId: player.playerId,
-
-			_pb_: {
-				manifest: [
-
-				]
-			},
 		};
-	}
-
-	player(player) {
+	},
+	player: function (player) {
 		return {
 			i: player.playerId,
 			n: player.nickname,
 			c: player.critterId,
 			x: player.x,
 			y: player.y,
-			r: player.r
+			r: player.r,
 		};
-	}
-
-	room(room) {
+	},
+	room: function (room) {
 		return {
 			roomId: room.id,
 			playerCrumbs: room.players.map(p => this.player(p)),
-
-			//Name: room.json.name,
-			//Height: room.json.height,
-			//Width: room.json.width,
-			//margin: room.json.margin,
-			//minDistance: room.json.minDistance,
-			//artwork: room.json.artwork,
-			//tileMap: room.json.tileMap,
-			//tileSize: room.json.tileSize
 		};
-	}
-
-	move(player) {
+	},
+	move: function (player) {
 		return {
 			i: player.playerId,
 			x: player.x,
 			y: player.y,
-			//r: player.r // not used because it's unneccecary and rotation acutally breaks
+			r: player.r, // causes moonwalk bug
 		};
-	}
-
-	message(player, message) {
+	},
+	message: function (player, message) {
 		return {
 			i: player.playerId,
-			m: message
+			n: player.nickname,
+			m: message,
 		};
-	}
-
-	leave(player) {
+	},
+	leave: function (player) {
 		return {
-			i: player.playerId
+			i: player.playerId,
 		};
-	}
-
-}
+	},
+};
