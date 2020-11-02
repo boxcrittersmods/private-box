@@ -2,7 +2,7 @@
 // @name         Private-box
 // @description  Connect to private-box / other boxcritters servers
 // @author       SArpnt
-// @version      Alpha 3.2.3
+// @version      Alpha 3.2.4
 // @namespace    https://boxcrittersmods.ga/authors/sarpnt/
 // @homepage     https://boxcrittersmods.ga/projects/private-box/
 // @updateURL    https://github.com/boxcrittersmods/private-box/raw/master/client.user.js
@@ -97,7 +97,7 @@
 	cardboard.on('loadScriptIndex', function (t) {
 		t.innerHTML = t.innerHTML.replace(
 			/world\.preload\s*\(([^)]*)\)/,
-			(_, p) => {
+			/*(_, p) => {
 				let preload = JSON5.parse(p);
 				function editPreload(p) {
 					if (/^https?:\/\/([^/]*)/.test(p.src))
@@ -119,10 +119,31 @@
 				else
 					editPreload(preload);
 				return `world.preload(${JSON.stringify(preload)})`;
-			}
+			}*/
+			/*`world.preload({"id":"manifest","src":"http://localhost:3000/data/manifest.json"})`*/
+			`{
+				let PBxhttp = new XMLHttpRequest();
+				PBxhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						let m = PBxhttp.response;
+						if (typeof m == 'string')
+							m = JSON.parse(m);
+						console.debug("[PB]", "Manifest:", m)
+						world.preload(m)
+					}
+				};
+				PBxhttp.open("GET", ${JSON.stringify(modData.urlParse("::ip::/data/manifest.json"))}, true);
+				PBxhttp.send();
+			}`
 		).replace(
 			/world\.connect\s*\([^\)\n]*\)/,
 			`world.connect(${JSON.stringify(url.ip)})`
+			/*`if (!world.socket) {
+				world.preload(client.getData("manifest").manifest);
+				world.on('complete', function () {
+					world.connect(${JSON.stringify(url.ip)});
+				});
+			}`*/
 		).replace(
 			/world\.login\s*\(\s*sessionStorage\.getItem\s*\(\s*['"`]sessionTicket['"`]\s*\)\s*\)\s*[;\n]/,
 			`world.login(Object.assign(

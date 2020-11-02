@@ -1,0 +1,49 @@
+[
+	{
+		"id": "items",
+		"src": "::ip::/data/items.json"
+	},
+	{
+		"id": "rooms",
+		"src": "::ip::/data/rooms.json"
+	},
+	{
+		"id": "shops",
+		"src": "::ip::/data/shops.json"
+	},
+	{
+		"id": "critters",
+		"src": "../media/v3/critters/hamster/data.json"
+	},
+	{
+		"id": "critters",
+		"src": "../media/v3/critters/penguin/data.json"
+	},
+	{
+		"id": "critters",
+		"src": "../media/v3/critters/beaver/data.json"
+	},
+	{
+		"id": "critters",
+		"src": "../media/v3/critters/lizard/data.json"
+	},
+	{
+		"id": "critters",
+		"src": "../media/v3/critters/snail/data.json"
+	},
+	{
+		"id": "emotes",
+		"src": "../media/v3/emotes/sprites.json",
+		"type": "spritesheet"
+	},
+	{
+		"id": "assets",
+		"src": "../media/v3/assets/sprites.json",
+		"type": "spritesheet"
+	},
+	{
+		"id": "shop",
+		"src": "../media/v3/shops/sprites.json",
+		"type": "spritesheet"
+	}
+]
