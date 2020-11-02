@@ -120,7 +120,6 @@
 					editPreload(preload);
 				return `world.preload(${JSON.stringify(preload)})`;
 			}*/
-			/*`world.preload({"id":"manifest","src":"http://localhost:3000/data/manifest.json"})`*/
 			`{
 				let PBxhttp = new XMLHttpRequest();
 				PBxhttp.onreadystatechange = function() {
@@ -138,12 +137,6 @@
 		).replace(
 			/world\.connect\s*\([^\)\n]*\)/,
 			`world.connect(${JSON.stringify(url.ip)})`
-			/*`if (!world.socket) {
-				world.preload(client.getData("manifest").manifest);
-				world.on('complete', function () {
-					world.connect(${JSON.stringify(url.ip)});
-				});
-			}`*/
 		).replace(
 			/world\.login\s*\(\s*sessionStorage\.getItem\s*\(\s*['"`]sessionTicket['"`]\s*\)\s*\)\s*[;\n]/,
 			`world.login(Object.assign(
