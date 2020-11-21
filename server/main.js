@@ -2,7 +2,7 @@
 
 const socketIo = require('socket.io');
 
-var world = {
+let world = {
 	listeners: {},
 	Session: function (socket, listeners) {
 		this.socket = socket;
@@ -36,7 +36,7 @@ function SetupSession(socket) {
 }
 
 function main(server) {
-	var io = socketIo.listen(server, { transports: ['websocket'] });
+	let io = socketIo.listen(server, { transports: ['websocket'] });
 	io.on("connect", SetupSession);
 }
 

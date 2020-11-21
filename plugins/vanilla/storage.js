@@ -6,7 +6,7 @@ const path = require('path');
 
 const DATA_FOLDER = path.normalize(require.main.filename + "/../data/");
 console.log("DATA:", DATA_FOLDER);
-var data = {
+let data = {
 	rooms: undefined,
 	players: undefined,
 };
@@ -16,12 +16,11 @@ var data = {
  *****************/
 
 function SaveNewPlayer(player) {
-	var index = GetPlayer(player.playerId, true); // true to get index
-	if (index == -1) {
+	let index = GetPlayer(player.playerId, true); // true to get index
+	if (index == -1)
 		players.push(player);
-	} else {
+	else
 		console.log(`player is already connected: ${player.nickname}`);
-	}
 }
 
 function GetPlayer(playerId, index = false) {
@@ -37,24 +36,23 @@ data.rooms = JSON.parse(fs.readFileSync(`${DATA_FOLDER}rooms.json`));
 /*
 function GetHoliday() {
 	if (new Date().getMonth() == 9) {
-		return "halloween"
+		return "halloween";
 	}
-	return undefined
 }
 async function SaveNewRoom(id) {
-	var name = id
+	let name = id;
 	
-	var holiday = GetHoliday()
+	let holiday = GetHoliday();
 	if (holiday) {
-		var holidayJson = name = name + "-" + holiday
+		let holidayJson = name = name + "-" + holiday;
 		if (JSONTools.JSONExists(holidayJson)) {
-			name = holidayJson
+			name = holidayJson;
 		}
 	}
 	
-	var data = await JSONTools.ReadJSON(folder + name + ".json")
-	var room = new Room(id, data)
-	rooms.push(room)
+	let data = await JSONTools.ReadJSON(`folder${name}.json"`);
+	let room = new Room(id, data);
+	rooms.push(room);
 }
 */
 

@@ -1,12 +1,12 @@
 "use strict";
 
-var port = process.env.PORT || 3000;
+let port = process.env.PORT || 3000;
 
-var http = require('http');
+let http = require('http');
 //const path = require('path');
-var express = require('express');
-var app = express();
-var server = http.Server(app);
+let express = require('express');
+let app = express();
+let server = http.Server(app);
 app.set('port', port);
 
 app.use(function (req, res, next) {
@@ -19,5 +19,5 @@ server.listen(port, function () {
 	console.log(`Starting server on port: ${port}, directory: ${__dirname}`);
 });
 
-var { main, world } = require('./server/main');
+let { main, world } = require('./server/main');
 main(server);
