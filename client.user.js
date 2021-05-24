@@ -2,7 +2,7 @@
 // @name         Private-box
 // @description  Connect to private-box / other boxcritters servers
 // @author       SArpnt
-// @version      Alpha 3.2.5
+// @version      Alpha 3.3.0
 // @namespace    https://boxcrittersmods.ga/authors/sarpnt/
 // @homepage     https://boxcrittersmods.ga/projects/private-box/
 // @updateURL    https://github.com/boxcrittersmods/private-box/raw/master/client.user.js
@@ -47,14 +47,14 @@
 
 	cardboard.on('loadScriptCreatejs', function (t) {
 		t.innerHTML = t.innerHTML.replace(
-			/var\s+i\s*=\s*d\.src/,
+			/var\s+i\s*=\s*d\.src/, // get loadItem ourl instead of source in b._createLoadItem
 			`var i = d.ourl`
 		).replace(
-			/i\s*=\s*b\s*\+\s*i,/,
+			/i\s*=\s*b\s*\+\s*i,/, // don't add whatever url b is in b._createLoadItem
 			``
 		).replace(
-			/f\s*=\s*document\.createElement\s*\(\s*['"`]img['"`]\s*\)\s*,\s*f\.src\s*=\s*g/,
-			`f = document.createElement("img" ), f.src = cardboard.mods.privateBox.urlParse(g)`
+			/f\s*=\s*document\.createElement\s*\(\s*['"`]img['"`]\s*\)\s*,\s*f\.src\s*=\s*g/, // change source of loaded images in b._parseData
+			`f = document.createElement("img"), f.src = cardboard.mods.privateBox.urlParse(g)`
 		);
 	});
 	cardboard.on('runScriptCreatejs', function (t) {
@@ -66,30 +66,30 @@
 			return li;
 		};
 	});
-	cardboard.on('loadScriptClient', function (t) {
-		t.innerHTML = t.innerHTML.replace(
+	cardboard.on('loadScriptWorld', function (t) {
+		t.innerHTML = t.innerHTML/*.replace(
 			/this\.code\s*\(\s*['"`]code['"`]\s*,\s*i\s*\)/,
 			`this\.code("code", i, ...e)`
-		).replace(
+		)*/.replace(
 			/new\s*createjs\.LoadQueue\((?:([^\),]*),?)*\)/g,
 			(...a) => {
-				let x = a.slice(1, a.length - 2);
-				return `new createjs.LoadQueue(${x[0]},${x[1]},true)`;
+				let x = a.slice(1, a.length - 2); // get previous params
+				return `new createjs.LoadQueue(${x[0]},${x[1]},true)`; // allow cross origin when loading assets
 			}
 		);
 	});
-	cardboard.on('runScriptClient', function () {
+	cardboard.on('runScriptWorld', function () {
 		convertToImgElement = function (t) {
 			if ("string" == typeof t) {
-				var e = document.createElement("img");
-				return e.crossOrigin = "Anonymous",
-					e.src = modData.urlParse(t),
-					e;
+				var i = document.createElement("img");
+				return i.crossOrigin = "Anonymous",
+					i.src = modData.urlParse(t),
+					i;
 			}
 			return t;
 		};
 	});
-	cardboard.on('loadScriptIndex', function (t) {
+	cardboard.on('loadScriptInit', function (t) {
 		t.innerHTML = t.innerHTML.replace(
 			/world\.preload\s*\(([^)]*)\)/,
 			/*(_, p) => {
@@ -115,25 +115,26 @@
 					editPreload(preload);
 				return `world.preload(${JSON.stringify(preload)})`;
 			}*/
-			`{
+			/*`{
 				let PBxhttp = new XMLHttpRequest();
 				PBxhttp.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {
 						let m = PBxhttp.response;
 						if (typeof m == 'string')
 							m = JSON.parse(m);
-						console.debug("[PB]", "Manifest:", m)
-						world.preload(m)
+						console.debug("[Private Box]", "Manifest:", m);
+						world.preload(m);
 					}
 				};
-				PBxhttp.open("GET", ${JSON.stringify(modData.urlParse("::ip::/data/manifest.json"))}, true);
+				PBxhttp.open("GET", "${JSON.stringify(url.ip)}/data/manifest.json", true);
 				PBxhttp.send();
-			}`
+			}`*/
+			`world.preload({src: \`\${${JSON.stringify(url.ip)}}/data/manifest.json\`, type: 'manifest'})` // get manifest (assets) from server
 		).replace(
 			/world\.connect\s*\([^\)\n]*\)/,
-			`world.connect(${JSON.stringify(url.ip)})`
+			`world.connect(${JSON.stringify(url.ip)})` // connect to server
 		).replace(
-			/world\.login\s*\(\s*sessionStorage\.getItem\s*\(\s*['"`]sessionTicket['"`]\s*\)\s*\)\s*[;\n]/,
+			/world\.login\s*\(\s*sessionStorage\.getItem\s*\(\s*['"`]sessionTicket['"`]\s*\)\s*\)\s*/, // send playerId, url sendData, and not sessionTicket
 			`world.login(Object.assign(
 					{
 						playerId: sessionStorage.getItem('playerId'),
@@ -141,14 +142,14 @@
 					},
 					${JSON.stringify(url.sendData)}
 				)
-			);`
+			)`
 		).replace(
-			/world\.joinRoom\s*\(\s*['"`]port['"`]\s*\)/,
+			/world\.joinRoom\s*\(\s*['"`]port['"`]\s*\)/, // join server lobby instead of hardcoding to port
 			`world.joinLobby()`
 		).replace(
-			/window\.location\.href\s*=\s*['"`]\.\.\/index\.html['"`][;\n]/,
-			`window.location.href = "../index.html";
-			sessionStorage.setItem('privateBox', window.location.search);`
+			/window\.location\.href\s*=\s*['"`]\.\.\/index\.html['"`][;\n]/, // store server information before redirecting to login
+			`sessionStorage.setItem('privateBox', window.location.search);
+			window.location.href = "../index.html";`
 		);
 	});
 })();

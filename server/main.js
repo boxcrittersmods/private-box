@@ -4,14 +4,13 @@ const socketIo = require('socket.io');
 
 let world = {
 	listeners: {},
-	Session: function (socket, listeners) {
+	Session: function (socket, listeners = world.listeners) {
 		this.socket = socket;
 		this.listeners = listeners;
-		for (let i in this.listeners) {
+		for (let i in this.listeners)
 			this.socket.on(i, (...c) => this.listeners[i](this, ...c));
-			console.log(i);
-		}
-		this.socket.emit("connect");
+		console.log("created player socket listeners");
+		//this.socket.emit("connect");
 	},
 	//Player
 	//Room: require('./room'),
@@ -25,18 +24,19 @@ let world = {
 
 	for (let i of plugins) {
 		console.log(`loading plugin ${i}`);
-		if (/[\\\/:*?"<>|]/.exec(i)) throw `${i} isn't a valid directory name`; // regex detects invalid characters
-		world = require(`../plugins/${i}/main`)(world);
+		if (/[\.:*?"<>|]/.exec(i)) // regex detects invalid characters
+			throw `${i} isn't a valid directory name`;
+		world = require(`../plugins/${i}/main`)(world); // TODO: improve path system
 	}
 }
 
 function SetupSession(socket) {
 	console.log("client connected:", socket.id);
-	new world.Session(socket, world.listeners);
+	new world.Session(socket);
 }
 
 function main(server) {
-	let io = socketIo.listen(server, { transports: ['websocket'] });
+	let io = socketIo(server, { transports: ['websocket'] });
 	io.on("connect", SetupSession);
 }
 

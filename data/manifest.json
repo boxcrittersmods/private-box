@@ -1,49 +1,56 @@
-[
-	{
-		"id": "items",
-		"src": "::ip::/data/items.json"
-	},
-	{
-		"id": "rooms",
-		"src": "::ip::/data/rooms.json"
-	},
-	{
-		"id": "shops",
-		"src": "::ip::/data/shops.json"
-	},
-	{
-		"id": "critters",
-		"src": "https://boxcritters.com/data/critter.json?critterId=hamster"
-	},
-	{
-		"id": "critters",
-		"src": "https://boxcritters.com/data/critter.json?critterId=penguin"
-	},
-	{
-		"id": "critters",
-		"src": "https://boxcritters.com/data/critter.json?critterId=beaver"
-	},
-	{
-		"id": "critters",
-		"src": "https://boxcritters.com/data/critter.json?critterId=lizard"
-	},
-	{
-		"id": "critters",
-		"src": "https://boxcritters.com/data/critter.json?critterId=snail"
-	},
-	{
-		"id": "emotes",
-		"src": "../media/v3/emotes/sprites.json",
-		"type": "spritesheet"
-	},
-	{
-		"id": "assets",
-		"src": "../media/v3/assets/sprites.json",
-		"type": "spritesheet"
-	},
-	{
-		"id": "shop",
-		"src": "../media/v3/shops/sprites.json",
-		"type": "spritesheet"
-	}
-]
+{
+	"manifest": [
+		{
+			"id": "items",
+			"src": "::ip::/data/items.json"
+		},
+		{
+			"id": "rooms",
+			"src": "::ip::/data/rooms.json"
+		},
+		{
+			"id": "shops",
+			"src": "::ip::/data/shops.json"
+		},
+		{
+			"id": "critters",
+			"name": "hamster",
+			"src": "https://boxcritters.com/base/media/critters/ea547e625cd06c2587cb42603a2b059f/data.json"
+		},
+		{
+			"id": "critters",
+			"name": "beaver",
+			"src": "https://boxcritters.com/base/media/critters/f0e6e493be6ee4adbd976aff792276d3/data.json"
+		},
+		{
+			"id": "critters",
+			"name": "snail",
+			"src": "https://boxcritters.com/base/media/critters/4a44db9f4614a36ee74daf2d71d6611a/data.json"
+		},
+		{
+			"id": "critters",
+			"name": "raccoon",
+			"src": "https://boxcritters.com/base/media/critters/3d66742ba871657f6d8ca84b88fbc532/data.json"
+		},
+		{
+			"id": "critters",
+			"name": "lizard",
+			"src": "https://boxcritters.com/base/media/critters/e009d3ebecbf04b78ed66cb3469cf9d8/data.json"
+		},
+		{
+			"id": "emotes",
+			"src": "../media/v3/emotes/sprites.json",
+			"type": "spritesheet"
+		},
+		{
+			"id": "assets",
+			"src": "../media/v3/assets/sprites.json",
+			"type": "spritesheet"
+		},
+		{
+			"id": "shop",
+			"src": "../media/v3/shops/sprites.json",
+			"type": "spritesheet"
+		}
+	]
+}
