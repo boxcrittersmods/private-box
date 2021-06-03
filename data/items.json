@@ -5,8 +5,11 @@
 		"cost": 0,
 		"slot": "head",
 		"theme": "test",
-		"hideEars": null,
-		"hideNose": null,
+		"hideEars": false,
+		"hideNose": false,
+		"hideFeet": false,
+		"hasFront": true,
+		"hasBack": false,
 		"icon": "https://media.boxcritters.com/items/viking/icon.png",
 		"bits": {
 			"front": "https://media.boxcritters.com/items/viking/front.png"

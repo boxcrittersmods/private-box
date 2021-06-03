@@ -15,28 +15,12 @@
 		"startZ": 0,
 		"startR": 180,
 		"media": {
-			"background": "::ip::/data/media/rooms/testroom/background.png",
 			"foreground": "::ip::/data/media/rooms/testroom/foreground.png",
-			"treasure": "::ip::/data/media/rooms/testroom/treasure.png",
+			"background": "::ip::/data/media/rooms/testroom/background.png",
 			"navMesh": "::ip::/data/media/rooms/testroom/navmesh.png",
-			"music": "https://media.boxcritters.com/rooms/tavern/4ed410b494748b5b0d1ff8878bcc0999/music.mp3"
+			"treasure": "::ip::/data/media/rooms/testroom/treasure.png",
+			"music": "https://boxcritters.com/.attachments/7fa503f851bd9fe4cc2c9fb2aec23dae/625e367d/Tavernv3Cellar.mp3"
 		},
-		"layout": {
-			"playground": [
-				{
-					"id": "testSprite",
-					"name": "",
-					"w": 234,
-					"h": 129,
-					"x": 514,
-					"y": 388,
-					"regX": 0,
-					"regY": 0,
-					"isWall": true
-				}
-			]
-		},
-		"triggers": [],
 		"spriteSheet": {
 			"images": [
 				"::ip::/data/media/rooms/testroom/sprites-0.png"
@@ -60,6 +44,22 @@
 					]
 				}
 			}
-		}
+		},
+		"layout": {
+			"playground": [
+				{
+					"id": "testSprite",
+					"name": "",
+					"w": 234,
+					"h": 129,
+					"x": 514,
+					"y": 388,
+					"regX": 0,
+					"regY": 0,
+					"isWall": true
+				}
+			]
+		},
+		"triggers": []
 	}
 ]
